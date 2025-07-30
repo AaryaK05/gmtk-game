@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dxais32qo4h3x"]
+
+[node name="Menu" type="Node"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1154.0
+offset_bottom = 650.0
+color = Color(0.6, 0.580392, 1, 0.521569)
+
+[node name="Container" type="BoxContainer" parent="ColorRect"]
+layout_mode = 0
+offset_left = 449.0
+offset_right = 715.0
+offset_bottom = 652.0
+alignment = 1
+vertical = true
+
+[node name="playBtn" type="Button" parent="ColorRect/Container"]
+layout_mode = 2
+text = "Play"
+
+[node name="settingsBtn" type="Button" parent="ColorRect/Container"]
+layout_mode = 2
+text = "Settings"
+
+[node name="quitBtn" type="Button" parent="ColorRect/Container"]
+layout_mode = 2
+text = "Quit"
