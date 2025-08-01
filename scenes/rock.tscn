@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfsl86kk1n0sk"]
+
+[ext_resource type="ArrayMesh" uid="uid://vahbydh8dr3f" path="res://assets/art/rock/rock.obj" id="1_c21h5"]
+[ext_resource type="Script" path="res://scripts/rock.gd" id="1_tbyfy"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tnbka"]
+
+[node name="Rock" type="RigidBody3D"]
+collision_layer = 2
+contact_monitor = true
+max_contacts_reported = 100
+script = ExtResource("1_tbyfy")
+
+[node name="Rock" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.42633, 0, 0, 0, 0.42633, 0, 0, 0, 0.42633, 0.0938457, 0, 0.206598)
+mesh = ExtResource("1_c21h5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.779864, 0, 0, 0, 0.779864, 0, 0, 0, 0.779864, 0.0984179, 0, 0.234564)
+shape = SubResource("SphereShape3D_tnbka")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

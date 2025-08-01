@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsv8ap28bn58"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7uxdl"]
+
+[node name="player" type="CharacterBody3D"]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(0.330103, 0, 0, 0, 0.242705, 0, 0, 0, 0.281012, 0, 0.492129, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.329915, 0, 0, 0, 0.329915, 0, 0, 0, 0.329915, 0, 0.542675, 0)
+shape = SubResource("CapsuleShape3D_7uxdl")
