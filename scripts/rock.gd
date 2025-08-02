@@ -17,7 +17,6 @@ func _physics_process(delta: float) -> void:
 		self.position.x=player.position.x
 		self.position.z=player.position.z-0.6
 	
-	
 func spawn_rock():
 	self.global_transform.origin=spawn_marker.global_transform.origin
 	self.freeze=true
@@ -27,13 +26,17 @@ func _on_body_entered(body: Node) -> void:
 	if body.name=="slingMeshCollision" and !slingshotCollide:
 		Globals.throw_ball=true
 		self.global_transform.origin=slingshot_marker.global_transform.origin
-		self.apply_central_impulse(Vector3(0, 0, 300))
+		self.apply_central_impulse(Vector3(0, 0, 1000))
 		player.grabbing=false
 		slingshotCollide=true
 		#print("done")
 	
 	if body is RigidBody3D:
-		mass+=30
+		mass+=0.25
+		for child_node in get_children(): # cant directly scale RigidBody3D, so we scale children instead
+			if child_node is Node3D:
+				child_node.scale += Vector3.ONE * 0.015
+		body.queue_free()
 		print(mass)
 	
 			
