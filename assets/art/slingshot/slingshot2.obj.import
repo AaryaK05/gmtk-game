@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c4ichw3fltsqy"
+path="res://.godot/imported/slingshot2.obj-ccba857c3470d5f092e846018af0f78e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/slingshot2.obj-ccba857c3470d5f092e846018af0f78e.mesh"]
+
+source_file="res://assets/art/slingshot/slingshot2.obj"
+dest_files=["res://.godot/imported/slingshot2.obj-ccba857c3470d5f092e846018af0f78e.mesh", "res://.godot/imported/slingshot2.obj-ccba857c3470d5f092e846018af0f78e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

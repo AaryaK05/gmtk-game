@@ -17,11 +17,11 @@ mesh = SubResource("CapsuleMesh_wbnbc")
 surface_material_override/0 = SubResource("StandardMaterial3D_kqrl0")
 
 [node name="playerColliderDetector" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.27489, 0)
+transform = Transform3D(1.64566, 0, 0, 0, 1.64566, 0, 0, 0, 1.64566, 0, -0.27489, 0)
 collision_mask = 8
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="playerColliderDetector"]
-transform = Transform3D(0.329915, 0, 0, 0, 0.329915, 0, 0, 0, 0.329915, 0, 0.489443, 0)
+transform = Transform3D(0.329915, 0, 0, 0, 0.329915, 0, 0, 0, 0.329915, 0, 0.196917, -0.155049)
 shape = SubResource("CapsuleShape3D_7uxdl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

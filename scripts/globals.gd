@@ -3,7 +3,7 @@ extends Node
 var throw_ball=false
 var gateHit=false
 var weight=0
-var totalWeight=30
+var totalWeight=50
 var respawnRocks=true
 
 func _physics_process(delta: float) -> void:

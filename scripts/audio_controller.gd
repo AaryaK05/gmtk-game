@@ -19,4 +19,4 @@ func play_stretch_slingshot():
 	stretch.play()
 	
 func play_shoot():
-	shoot.play()
+	shoot.play() 

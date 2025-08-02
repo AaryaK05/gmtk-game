@@ -16,6 +16,7 @@ var timer=Timer.new()
 var camera_offset=Vector3(-1.551,0.479,0.888)
 
 func _ready() -> void:
+	self.global_transform.origin = spawn_marker.global_transform.origin
 	add_child(timer)
 	timer.timeout.connect(ball_throwing_anim)
 
@@ -53,6 +54,7 @@ func _physics_process(delta: float) -> void:
 					AudioController.play_push_rock()
 					grab_ball()
 				else:
+					
 					release_ball()
 		move_and_slide()
 				
@@ -60,10 +62,11 @@ func _physics_process(delta: float) -> void:
 		Globals.throw_ball=false
 		#stop player from moving
 		canMove=false 
+		AudioController.play_shoot()
 		#Camera view for throwing the ball
-		camera_view()
+		throw_camera_view()
 		#after 3 seconds get spawn position
-		timer.start(3)		
+		timer.start(6)		
 		
 		
 	
@@ -79,23 +82,18 @@ func ball_throwing_anim():
 	timer.stop()
 	spawn_position()
 
-func camera_view():
+func throw_camera_view():
 	camera_3d.position.x=slingy.position.x
 	camera_3d.position.y=slingy.position.y -10
 	camera_3d.position.z=slingy.position.z - 25
-	#print(camera_3d.position)
-	#print(camera_3d.rotation)
 	camera_3d.rotate_y(179.6)
 	
 func spawn_position():
 	self.global_transform.origin = spawn_marker.global_transform.origin
-	#print(spawn_marker.transform.origin)
-	#print(self.position)
 	self.canMove=true
 	Globals.gateHit=false
 	if !Globals.gateHit:
 		rock.spawn_rock()
-	Globals.respawnRocks=true
 	camera_3d.global_transform = spawn_marker.global_transform 
 	camera_3d.translate(camera_offset)
 	camera_3d.rotation_degrees.y=-31

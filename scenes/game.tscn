@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bou5ybxuppsop"]
+[gd_scene load_steps=21 format=3 uid="uid://bou5ybxuppsop"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_olvff"]
 [ext_resource type="PackedScene" uid="uid://bj6fg26iursll" path="res://scenes/mountain.tscn" id="1_v3044"]
@@ -7,15 +7,37 @@
 [ext_resource type="Script" path="res://scripts/player.gd" id="4_vy6fh"]
 [ext_resource type="PackedScene" uid="uid://dnglxpd1nepii" path="res://scenes/slingshot.tscn" id="5_7mr43"]
 [ext_resource type="PackedScene" uid="uid://bfsl86kk1n0sk" path="res://scenes/rock.tscn" id="5_usuh1"]
+[ext_resource type="PackedScene" uid="uid://cy2sreunfsa5d" path="res://scenes/barrier.tscn" id="8_i8l62"]
+[ext_resource type="PackedScene" uid="uid://bs5ugby8nbcpd" path="res://scenes/gate.tscn" id="9_7pqwp"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qqewi"]
+sky_top_color = Color(0.670588, 0.364706, 0.290196, 1)
+sky_horizon_color = Color(0.762591, 0.648617, 0.147722, 1)
+ground_bottom_color = Color(0.745098, 0.25098, 0.0509804, 1)
+ground_horizon_color = Color(0.952715, 0.83368, 0.866797, 1)
+
+[sub_resource type="Sky" id="Sky_tjkj7"]
+sky_material = SubResource("ProceduralSkyMaterial_qqewi")
+
+[sub_resource type="Environment" id="Environment_cmf3c"]
+background_mode = 2
+background_color = Color(0.678431, 0.47451, 0, 1)
+sky = SubResource("Sky_tjkj7")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_txljc"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4c0gx"]
+albedo_color = Color(0.862745, 0.388235, 0.054902, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_q7ukp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ibv2n"]
+albedo_color = Color(0.111917, 0.286092, 0.497242, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cwv5k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5xml6"]
-albedo_color = Color(0.38398, 0.227837, 0.177322, 1)
+albedo_color = Color(0.232544, 0.0698968, 0.0396285, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_gwuds"]
 material = SubResource("StandardMaterial3D_5xml6")
@@ -27,30 +49,21 @@ data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0
 script = ExtResource("1_olvff")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cmf3c")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.772212, -0.623749, -0.120934, 0.0648712, -0.11194, 0.991595, -0.632044, -0.773567, -0.045978, 26.8889, 99.8103, 89.8313)
 
-[node name="objSpawner" type="Marker3D" parent="."]
-transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 1.22704, 30.2293, 28.511)
-script = ExtResource("2_1p5j0")
+[node name="mountain" parent="." instance=ExtResource("1_v3044")]
 
-[node name="objSpawner2" type="Marker3D" parent="."]
-transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 6.81613, 21.6785, 57.6789)
-script = ExtResource("2_1p5j0")
-
-[node name="objSpawner3" type="Marker3D" parent="."]
-transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 7.67402, 30.3455, 28.6645)
-script = ExtResource("2_1p5j0")
-
-[node name="spawnMarker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4177, 6.97752, 131.03)
+[node name="slingy" parent="." instance=ExtResource("5_7mr43")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08629, 35.4482, 0.450868)
 
 [node name="Rock" parent="." instance=ExtResource("5_usuh1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8294, 7.44832, 127.809)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8294, 20.948, 130.375)
 
 [node name="player" parent="." instance=ExtResource("2_ch1h5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8294, 7.44832, 130.171)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8294, 7.44832, 121.581)
 script = ExtResource("4_vy6fh")
 
 [node name="Camera3D" type="Camera3D" parent="player"]
@@ -59,29 +72,26 @@ transform = Transform3D(0.857167, 0.0493642, -0.512667, 0, 0.995396, 0.0958458, 
 [node name="Timer" type="Timer" parent="player"]
 one_shot = true
 
-[node name="slingy" parent="." instance=ExtResource("5_7mr43")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08629, 33.2913, 0.450868)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="land" type="MeshInstance3D" parent="."]
 transform = Transform3D(1066.79, 0, 0, 0, 2.08824, 0, 0, 0, 1813.59, 0, -120.944, 0)
 mesh = SubResource("PlaneMesh_txljc")
-
-[node name="mountain" parent="." instance=ExtResource("1_v3044")]
+surface_material_override/0 = SubResource("StandardMaterial3D_4c0gx")
 
 [node name="gate" type="StaticBody3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 261.66)
+transform = Transform3D(-1.1059, 0, -9.66808e-08, 0, 1.1059, 0, 9.66808e-08, 0, -1.1059, 0, 0, 374.294)
 collision_layer = 129
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="gate"]
-transform = Transform3D(367.866, 0, 0, 0, 192.779, 0, 0, 0, 1, 0, 0, 126.305)
+transform = Transform3D(367.866, 0, -7.10543e-15, 0, 192.779, 0, 0, 0, 1, -2.63657e-06, 0, 156.464)
 mesh = SubResource("BoxMesh_q7ukp")
+surface_material_override/0 = SubResource("StandardMaterial3D_ibv2n")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="gate"]
 transform = Transform3D(217.141, 0, 0, 0, 217.141, 0, 0, 0, 217.141, -0.309177, 0, 19.1452)
 shape = SubResource("BoxShape3D_cwv5k")
 
 [node name="spawnArea" type="MeshInstance3D" parent="."]
-transform = Transform3D(70.4778, 0, 0, 0, 1, 0, 0, 0, 13.2022, 11.8374, 6.47646, 124.608)
+transform = Transform3D(163.13, 0, 0, 0, 3.65426, 0, 0, 0, 241.454, 11.8374, 6.09815, 100.524)
 mesh = SubResource("PlaneMesh_gwuds")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="spawnArea"]
@@ -91,3 +101,84 @@ shape = SubResource("ConcavePolygonShape3D_jva8u")
 
 [node name="slingshotMarker" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.54462, 36.4411, 0)
+
+[node name="spawnMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.573654, 10.4177, 6.97752, 180.724)
+
+[node name="Background" type="Node3D" parent="."]
+
+[node name="mountain2" parent="Background" instance=ExtResource("1_v3044")]
+transform = Transform3D(1.93765, 0, 0, 0, 2.03577, 0, 0, 0, 1, 227.223, -1.00478, -123.226)
+
+[node name="mountain3" parent="Background" instance=ExtResource("1_v3044")]
+transform = Transform3D(1.93765, 0, 0, 0, 1.06429, 0, 0, 0, 1, 322.281, 1.04038, 127.805)
+
+[node name="mountain4" parent="Background" instance=ExtResource("1_v3044")]
+transform = Transform3D(1.93765, 0, 0, 0, 1.97215, 0, 0, 0, 1, -270.129, -2.1951, -137.062)
+
+[node name="spawners" type="Node3D" parent="."]
+
+[node name="objSpawner" type="Marker3D" parent="spawners"]
+transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 7.03965, 32.9432, 45.5442)
+script = ExtResource("2_1p5j0")
+
+[node name="objSpawner2" type="Marker3D" parent="spawners"]
+transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, -9.97625, 27.4701, 59.1228)
+script = ExtResource("2_1p5j0")
+
+[node name="objSpawner3" type="Marker3D" parent="spawners"]
+transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 3.63347, 32.6247, 45.0129)
+script = ExtResource("2_1p5j0")
+
+[node name="objSpawner4" type="Marker3D" parent="spawners"]
+transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, -5.1053, 21.6265, 102.377)
+script = ExtResource("2_1p5j0")
+
+[node name="objSpawner5" type="Marker3D" parent="spawners"]
+transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 22.9742, 23.6777, 94.2902)
+script = ExtResource("2_1p5j0")
+
+[node name="objSpawner6" type="Marker3D" parent="spawners"]
+transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 12.4352, 18.6874, 122.985)
+script = ExtResource("2_1p5j0")
+
+[node name="objSpawner7" type="Marker3D" parent="spawners"]
+transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 11.1789, 32.9432, 48.6391)
+script = ExtResource("2_1p5j0")
+
+[node name="objSpawner8" type="Marker3D" parent="spawners"]
+transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 2.47434, 24.8096, 73.1705)
+script = ExtResource("2_1p5j0")
+
+[node name="objSpawner9" type="Marker3D" parent="spawners"]
+transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 22.7612, 25.9969, 62.8849)
+script = ExtResource("2_1p5j0")
+
+[node name="objSpawner10" type="Marker3D" parent="spawners"]
+transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, -1.74779, 21.6265, 102.377)
+script = ExtResource("2_1p5j0")
+
+[node name="objSpawner11" type="Marker3D" parent="spawners"]
+transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 25.4939, 23.6777, 93.5733)
+script = ExtResource("2_1p5j0")
+
+[node name="objSpawner12" type="Marker3D" parent="spawners"]
+transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 9.53907, 18.7206, 122.615)
+script = ExtResource("2_1p5j0")
+
+[node name="other" type="Node3D" parent="."]
+
+[node name="Barrier" parent="other" instance=ExtResource("8_i8l62")]
+transform = Transform3D(1.60568, 0, 0, 0, 1, 0, 0, 0, 4.72957, -39.6179, 4.75482, 161.675)
+
+[node name="Barrier4" parent="other" instance=ExtResource("8_i8l62")]
+transform = Transform3D(0.859886, 0, 0, 0, 1, 0, 0, 0, 1.24019, -48.7027, 4.75482, 192.763)
+
+[node name="Barrier2" parent="other" instance=ExtResource("8_i8l62")]
+transform = Transform3D(1.60568, 0, 0, 0, 1, 0, 0, 0, 2.45966, 35.4077, 4.75482, 161.675)
+
+[node name="Barrier3" parent="other" instance=ExtResource("8_i8l62")]
+transform = Transform3D(1.60568, 0, 0, 0, 1.84994, 0, 0, 0, 2.45966, 28.3631, 4.9573, 187.597)
+
+[node name="Node3D" parent="." instance=ExtResource("9_7pqwp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4598, 6.09815, 208.245)
