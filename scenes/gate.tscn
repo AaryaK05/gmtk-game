@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://lqvdja8um638"]
 
-[ext_resource type="ArrayMesh" path="res://assets/art/door/gatedoor2.obj" id="1_4434u"]
+[ext_resource type="ArrayMesh" uid="uid://c8yx6v2ocm5hw" path="res://assets/art/gate/gatedoor (1).obj" id="1_umt0v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j7lsg"]
 albedo_color = Color(0.000110075, 0.149327, 0.513013, 1)
@@ -18,7 +18,7 @@ data = PackedVector3Array(3, 8.5585, -0.5, 3, -1, -0.5, 3, 8.5585, 0.5, 3, 8.558
 
 [node name="Gatedoor" type="MeshInstance3D" parent="."]
 transform = Transform3D(16.4869, 0, 0, 0, 16.4869, 0, 0, 0, 16.7535, -6.61676, 3.29536, -1.85814)
-mesh = ExtResource("1_4434u")
+mesh = ExtResource("1_umt0v")
 surface_material_override/0 = SubResource("StandardMaterial3D_j7lsg")
 surface_material_override/1 = SubResource("StandardMaterial3D_pyne2")
 surface_material_override/2 = SubResource("StandardMaterial3D_mhclj")
