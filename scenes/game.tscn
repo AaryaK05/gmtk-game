@@ -1,26 +1,93 @@
-[gd_scene load_steps=5 format=3 uid="uid://bou5ybxuppsop"]
+[gd_scene load_steps=14 format=3 uid="uid://bou5ybxuppsop"]
 
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_olvff"]
 [ext_resource type="PackedScene" uid="uid://bj6fg26iursll" path="res://scenes/mountain.tscn" id="1_v3044"]
+[ext_resource type="Script" path="res://scripts/obj_spawner.gd" id="2_1p5j0"]
 [ext_resource type="PackedScene" uid="uid://dsv8ap28bn58" path="res://scenes/player.tscn" id="2_ch1h5"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="4_vy6fh"]
+[ext_resource type="PackedScene" uid="uid://dnglxpd1nepii" path="res://scenes/slingshot.tscn" id="5_7mr43"]
 [ext_resource type="PackedScene" uid="uid://bfsl86kk1n0sk" path="res://scenes/rock.tscn" id="5_usuh1"]
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_txljc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_q7ukp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cwv5k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5xml6"]
+albedo_color = Color(0.38398, 0.227837, 0.177322, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gwuds"]
+material = SubResource("StandardMaterial3D_5xml6")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jva8u"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
 [node name="game" type="Node3D"]
+script = ExtResource("1_olvff")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 33.5499)
+transform = Transform3D(0.772212, -0.623749, -0.120934, 0.0648712, -0.11194, 0.991595, -0.632044, -0.773567, -0.045978, 26.8889, 99.8103, 89.8313)
 
-[node name="mountain" parent="." instance=ExtResource("1_v3044")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.88306, 0, -0.086925)
+[node name="objSpawner" type="Marker3D" parent="."]
+transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 1.22704, 30.2293, 28.511)
+script = ExtResource("2_1p5j0")
+
+[node name="objSpawner2" type="Marker3D" parent="."]
+transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 6.81613, 21.6785, 57.6789)
+script = ExtResource("2_1p5j0")
+
+[node name="objSpawner3" type="Marker3D" parent="."]
+transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 7.67402, 30.3455, 28.6645)
+script = ExtResource("2_1p5j0")
+
+[node name="spawnMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4177, 6.97752, 131.03)
+
+[node name="Rock" parent="." instance=ExtResource("5_usuh1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8294, 7.44832, 127.809)
 
 [node name="player" parent="." instance=ExtResource("2_ch1h5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.361078, -2.30208, 32.7766)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8294, 7.44832, 130.171)
 script = ExtResource("4_vy6fh")
 
 [node name="Camera3D" type="Camera3D" parent="player"]
-transform = Transform3D(0.898434, 0, -0.439108, 0, 1, 0, 0.439108, 0, 0.898434, -2.50399, 1.55402, 1.81023)
+transform = Transform3D(0.857167, 0.0493642, -0.512667, 0, 0.995396, 0.0958458, 0.515038, -0.0821558, 0.853221, -1.55147, 0.478958, 0.888453)
 
-[node name="Rock" parent="." instance=ExtResource("5_usuh1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.284872, -0.828068, 31.7701)
+[node name="Timer" type="Timer" parent="player"]
+one_shot = true
+
+[node name="slingy" parent="." instance=ExtResource("5_7mr43")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08629, 33.2913, 0.450868)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1066.79, 0, 0, 0, 2.08824, 0, 0, 0, 1813.59, 0, -120.944, 0)
+mesh = SubResource("PlaneMesh_txljc")
+
+[node name="mountain" parent="." instance=ExtResource("1_v3044")]
+
+[node name="gate" type="StaticBody3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 261.66)
+collision_layer = 129
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="gate"]
+transform = Transform3D(367.866, 0, 0, 0, 192.779, 0, 0, 0, 1, 0, 0, 126.305)
+mesh = SubResource("BoxMesh_q7ukp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="gate"]
+transform = Transform3D(217.141, 0, 0, 0, 217.141, 0, 0, 0, 217.141, -0.309177, 0, 19.1452)
+shape = SubResource("BoxShape3D_cwv5k")
+
+[node name="spawnArea" type="MeshInstance3D" parent="."]
+transform = Transform3D(70.4778, 0, 0, 0, 1, 0, 0, 0, 13.2022, 11.8374, 6.47646, 124.608)
+mesh = SubResource("PlaneMesh_gwuds")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="spawnArea"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="spawnArea/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_jva8u")
+
+[node name="slingshotMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.54462, 36.4411, 0)

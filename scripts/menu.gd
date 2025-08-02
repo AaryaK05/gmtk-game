@@ -1,8 +1,10 @@
 extends Node
-@onready var main: BoxContainer = $ColorRect/main
-@onready var settings: BoxContainer = $ColorRect/settings
+@onready var main: BoxContainer = $Buttons/main
+@onready var settings: BoxContainer = $Buttons/settings
+
 
 func _ready() -> void:
+	AudioController.play_music()
 	main.visible=true
 	settings.visible=false
 	

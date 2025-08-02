@@ -1,12 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://dsv8ap28bn58"]
+[gd_scene load_steps=5 format=3 uid="uid://dsv8ap28bn58"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wbnbc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kqrl0"]
+albedo_color = Color(0.223529, 1, 1, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7uxdl"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yabjq"]
+
 [node name="player" type="CharacterBody3D"]
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
-transform = Transform3D(0.330103, 0, 0, 0, 0.242705, 0, 0, 0, 0.281012, 0, 0.492129, 0)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.458828, 0, 0, 0, 0.476402, 0, 0, 0, 0.476402, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_wbnbc")
+surface_material_override/0 = SubResource("StandardMaterial3D_kqrl0")
+
+[node name="playerColliderDetector" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.27489, 0)
+collision_mask = 8
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="playerColliderDetector"]
+transform = Transform3D(0.329915, 0, 0, 0, 0.329915, 0, 0, 0, 0.329915, 0, 0.489443, 0)
+shape = SubResource("CapsuleShape3D_7uxdl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.329915, 0, 0, 0, 0.329915, 0, 0, 0, 0.329915, 0, 0.542675, 0)
-shape = SubResource("CapsuleShape3D_7uxdl")
+transform = Transform3D(0.460428, 0, 0, 0, 0.460428, 0, 0, 0, 0.460428, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_yabjq")

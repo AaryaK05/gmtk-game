@@ -1,98 +1,101 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxais32qo4h3x"]
+[gd_scene load_steps=4 format=3 uid="uid://dxais32qo4h3x"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_g528g"]
 [ext_resource type="Texture2D" uid="uid://kn0k1swmtfj6" path="res://assets/art/background/background.png" id="2_650pf"]
 [ext_resource type="Script" path="res://scripts/music_slider.gd" id="2_3045g"]
-[ext_resource type="AudioStream" uid="uid://gvgf0pcs2dks" path="res://assets/music/Lightyeartraxx - Night Runner (Chiptune Edit).mp3" id="2_a8tmk"]
 
 [node name="Menu" type="Node"]
 script = ExtResource("1_g528g")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -978.0
+offset_top = -563.5
+offset_right = 978.0
+offset_bottom = 563.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Background" type="Sprite2D" parent="Control"]
 position = Vector2(979.976, 563.75)
 scale = Vector2(4.5834, 4.67708)
 texture = ExtResource("2_650pf")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-color = Color(0.121569, 0.0588235, 0.0823529, 0.203922)
+[node name="Buttons" type="Node" parent="."]
 
-[node name="main" type="BoxContainer" parent="ColorRect"]
+[node name="main" type="BoxContainer" parent="Buttons"]
 visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -194.0
-offset_top = -138.0
-offset_right = 192.0
-offset_bottom = 143.0
-grow_horizontal = 2
+offset_left = 81.0
+offset_top = -72.0
+offset_right = 479.0
+offset_bottom = 377.0
 grow_vertical = 2
+size_flags_horizontal = 0
 alignment = 1
 vertical = true
 
-[node name="playBtn" type="Button" parent="ColorRect/main"]
+[node name="playBtn" type="Button" parent="Buttons/main"]
 layout_mode = 2
 text = "Play"
 
-[node name="settingsBtn" type="Button" parent="ColorRect/main"]
+[node name="settingsBtn" type="Button" parent="Buttons/main"]
 layout_mode = 2
 text = "Settings"
 
-[node name="quitBtn" type="Button" parent="ColorRect/main"]
+[node name="quitBtn" type="Button" parent="Buttons/main"]
 layout_mode = 2
 text = "Quit"
 
-[node name="settings" type="BoxContainer" parent="ColorRect"]
-layout_mode = 1
+[node name="settings" type="BoxContainer" parent="Buttons"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -398.0
-offset_top = -109.0
-offset_right = 398.0
-offset_bottom = 65.0
+offset_left = -429.0
+offset_top = -148.5
+offset_right = 429.0
+offset_bottom = 148.5
 grow_horizontal = 2
 grow_vertical = 2
 vertical = true
 
-[node name="settingsLabel" type="Label" parent="ColorRect/settings"]
+[node name="settingsLabel" type="Label" parent="Buttons/settings"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Settings"
 
-[node name="sliderContainer" type="GridContainer" parent="ColorRect/settings"]
+[node name="sliderContainer" type="GridContainer" parent="Buttons/settings"]
 layout_mode = 2
 size_flags_vertical = 3
 columns = 2
 
-[node name="Labels" type="FlowContainer" parent="ColorRect/settings/sliderContainer"]
+[node name="Labels" type="FlowContainer" parent="Buttons/settings/sliderContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="music" type="Label" parent="ColorRect/settings/sliderContainer/Labels"]
+[node name="music" type="Label" parent="Buttons/settings/sliderContainer/Labels"]
 layout_mode = 2
 text = "Music"
 
-[node name="sound" type="Label" parent="ColorRect/settings/sliderContainer/Labels"]
+[node name="sound" type="Label" parent="Buttons/settings/sliderContainer/Labels"]
 layout_mode = 2
 text = "Sound"
 
-[node name="Sliders" type="Control" parent="ColorRect/settings/sliderContainer"]
+[node name="Sliders" type="Control" parent="Buttons/settings/sliderContainer"]
 layout_mode = 2
 
-[node name="HSlider" type="HSlider" parent="ColorRect/settings/sliderContainer/Sliders"]
+[node name="HSlider" type="HSlider" parent="Buttons/settings/sliderContainer/Sliders"]
 layout_mode = 2
 offset_right = 748.0
 offset_bottom = 16.0
@@ -104,7 +107,7 @@ value = 0.2
 ticks_on_borders = true
 script = ExtResource("2_3045g")
 
-[node name="HSlider2" type="HSlider" parent="ColorRect/settings/sliderContainer/Sliders"]
+[node name="HSlider2" type="HSlider" parent="Buttons/settings/sliderContainer/Sliders"]
 layout_mode = 2
 offset_top = 20.0
 offset_right = 749.0
@@ -115,19 +118,14 @@ max_value = 1.0
 step = 0.001
 value = 1.0
 
-[node name="backBtn" type="Button" parent="ColorRect/settings"]
+[node name="backBtn" type="Button" parent="Buttons/settings"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Back
 "
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_a8tmk")
-autoplay = true
-bus = &"music"
-
-[connection signal="pressed" from="ColorRect/main/playBtn" to="." method="_on_play_btn_pressed"]
-[connection signal="pressed" from="ColorRect/main/settingsBtn" to="." method="_on_settings_btn_pressed"]
-[connection signal="pressed" from="ColorRect/main/quitBtn" to="." method="_on_quit_btn_pressed"]
-[connection signal="pressed" from="ColorRect/settings/backBtn" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Buttons/main/playBtn" to="." method="_on_play_btn_pressed"]
+[connection signal="pressed" from="Buttons/main/settingsBtn" to="." method="_on_settings_btn_pressed"]
+[connection signal="pressed" from="Buttons/main/quitBtn" to="." method="_on_quit_btn_pressed"]
+[connection signal="pressed" from="Buttons/settings/backBtn" to="." method="_on_back_pressed"]
