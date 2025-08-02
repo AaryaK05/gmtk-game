@@ -6,11 +6,9 @@ extends RigidBody3D
 @onready var slingshot_marker: Marker3D = $"../slingshotMarker"
 var slingshotCollide=false
 #var ballOffset=Vector3(0,5.5,4.9)
-@onready var rock_mesh: MeshInstance3D = $Rock
 
 func _ready() -> void:
-	self.global_transform.origin=spawn_marker.global_transform.origin
-
+	pass
 
 func _physics_process(delta: float) -> void:
 	#print(self.position)
@@ -25,21 +23,18 @@ func spawn_rock():
 	self.freeze=true
 
 func _on_body_entered(body: Node) -> void:
-	#print(body.name)
+	print(body.name)
 	if body.name=="slingMeshCollision" and !slingshotCollide:
 		Globals.throw_ball=true
 		self.global_transform.origin=slingshot_marker.global_transform.origin
-		self.apply_central_impulse(Vector3(0, 0, 8000))
+		self.apply_central_impulse(Vector3(0, 0, 300))
 		player.grabbing=false
 		slingshotCollide=true
 		#print("done")
 	
 	if body is RigidBody3D:
-		mass+=5
-		rock_mesh.scale*=Vector3(1.02,1.02,1.02)
-		#print(self.scale)
+		mass+=30
 		print(mass)
-	
 	
 			
 	if body.name=="gate" and !Globals.gateHit:
@@ -48,7 +43,8 @@ func _on_body_entered(body: Node) -> void:
 		spawn_rock()
 		#self.translate(ballOffset)
 		#self.freeze=true
-		slingshotCollide=false		
+		slingshotCollide=false
+		
 		Globals.weight+=self.mass
 		print(Globals.weight)
 	

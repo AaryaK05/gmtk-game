@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bs5ugby8nbcpd"]
+[gd_scene load_steps=6 format=3 uid="uid://lqvdja8um638"]
 
-[ext_resource type="ArrayMesh" uid="uid://bbyi7kdejpvxw" path="res://assets/art/door/gatedoor2.obj" id="1_4434u"]
+[ext_resource type="ArrayMesh" path="res://assets/art/door/gatedoor2.obj" id="1_4434u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j7lsg"]
 albedo_color = Color(0.000110075, 0.149327, 0.513013, 1)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bj6fg26iursll"]
 
-[ext_resource type="PackedScene" uid="uid://cy2sreunfsa5d" path="res://scenes/barrier.tscn" id="2_oc0rc"]
-[ext_resource type="ArrayMesh" uid="uid://gml88rxpmu3x" path="res://assets/art/mountain/mountain2.obj" id="2_x5m7i"]
+[ext_resource type="PackedScene" uid="uid://bqcmus1w1qco7" path="res://scenes/barrier.tscn" id="2_oc0rc"]
+[ext_resource type="ArrayMesh" uid="uid://c4y83g2o5dtbf" path="res://assets/art/mountain/mountain2.obj" id="2_x5m7i"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rxt2g"]
 albedo_color = Color(0.243137, 0.0745098, 0.0431373, 1)

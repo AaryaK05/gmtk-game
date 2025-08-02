@@ -7,8 +7,8 @@
 [ext_resource type="Script" path="res://scripts/player.gd" id="4_vy6fh"]
 [ext_resource type="PackedScene" uid="uid://dnglxpd1nepii" path="res://scenes/slingshot.tscn" id="5_7mr43"]
 [ext_resource type="PackedScene" uid="uid://bfsl86kk1n0sk" path="res://scenes/rock.tscn" id="5_usuh1"]
-[ext_resource type="PackedScene" uid="uid://cy2sreunfsa5d" path="res://scenes/barrier.tscn" id="8_i8l62"]
-[ext_resource type="PackedScene" uid="uid://bs5ugby8nbcpd" path="res://scenes/gate.tscn" id="9_7pqwp"]
+[ext_resource type="PackedScene" uid="uid://bqcmus1w1qco7" path="res://scenes/barrier.tscn" id="8_i8l62"]
+[ext_resource type="PackedScene" uid="uid://lqvdja8um638" path="res://scenes/gate.tscn" id="9_7pqwp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qqewi"]
 sky_top_color = Color(0.670588, 0.364706, 0.290196, 1)
@@ -60,10 +60,10 @@ transform = Transform3D(0.772212, -0.623749, -0.120934, 0.0648712, -0.11194, 0.9
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08629, 35.4482, 0.450868)
 
 [node name="Rock" parent="." instance=ExtResource("5_usuh1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8294, 20.948, 130.375)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8294, 6.91029, 173.919)
 
 [node name="player" parent="." instance=ExtResource("2_ch1h5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8294, 7.44832, 121.581)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8294, 7.44832, 175.831)
 script = ExtResource("4_vy6fh")
 
 [node name="Camera3D" type="Camera3D" parent="player"]
@@ -103,7 +103,7 @@ shape = SubResource("ConcavePolygonShape3D_jva8u")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.54462, 36.4411, 0)
 
 [node name="spawnMarker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.573654, 10.4177, 6.97752, 180.724)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.573654, -0.48786, 10.6533, 180.724)
 
 [node name="Background" type="Node3D" parent="."]
 
