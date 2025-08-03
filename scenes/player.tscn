@@ -1,4 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsv8ap28bn58"]
+[gd_scene load_steps=10 format=3 uid="uid://dsv8ap28bn58"]
+
+[ext_resource type="Texture2D" uid="uid://codmsw3txetwg" path="res://assets/art/player/sprite_0.png" id="1_k4m1l"]
+[ext_resource type="Texture2D" uid="uid://cieiyeoxtt441" path="res://assets/art/player/sprite_1.png" id="2_jrjhb"]
+[ext_resource type="Texture2D" uid="uid://dd80cf72f8vo7" path="res://assets/art/player/sprite_2.png" id="3_11qr2"]
+[ext_resource type="Texture2D" uid="uid://x704rq7ht6ob" path="res://assets/art/player/sprite_3.png" id="4_8doxt"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wbnbc"]
 
@@ -9,10 +14,36 @@ albedo_color = Color(0.223529, 1, 1, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yabjq"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_ydvpm"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_k4m1l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_jrjhb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_11qr2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8doxt")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
 [node name="player" type="CharacterBody3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.458828, 0, 0, 0, 0.476402, 0, 0, 0, 0.476402, 0, 0, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_wbnbc")
 surface_material_override/0 = SubResource("StandardMaterial3D_kqrl0")
 
@@ -27,3 +58,10 @@ shape = SubResource("CapsuleShape3D_7uxdl")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.460428, 0, 0, 0, 0.460428, 0, 0, 0, 0.460428, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_yabjq")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(4.73848, 0, 0, 0, 4.73848, 0, 0, 0, 4.73848, 0, 0, 0)
+sprite_frames = SubResource("SpriteFrames_ydvpm")
+animation = &"walk"
+frame = 1
+frame_progress = 0.973933

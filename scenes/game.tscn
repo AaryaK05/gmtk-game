@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bou5ybxuppsop"]
+[gd_scene load_steps=26 format=3 uid="uid://bou5ybxuppsop"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_olvff"]
 [ext_resource type="PackedScene" uid="uid://bj6fg26iursll" path="res://scenes/mountain.tscn" id="1_v3044"]
@@ -47,6 +47,43 @@ material = SubResource("StandardMaterial3D_5xml6")
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jva8u"]
 data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
+[sub_resource type="Animation" id="Animation_3oprj"]
+resource_name = "camer_pan_start"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player/Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-1.55147, 1.47369, 0.888458), Vector3(-1.551, 0.474, 0.888)]
+}
+
+[sub_resource type="Animation" id="Animation_1i5gb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player/Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.55147, 1.47369, 0.888458)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xdcyg"]
+_data = {
+"RESET": SubResource("Animation_1i5gb"),
+"camer_pan_start": SubResource("Animation_3oprj")
+}
+
 [node name="game" type="Node"]
 script = ExtResource("1_olvff")
 
@@ -62,14 +99,14 @@ transform = Transform3D(0.772212, -0.623749, -0.120934, 0.0648712, -0.11194, 0.9
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08629, 35.4482, 0.450868)
 
 [node name="Rock" parent="." instance=ExtResource("5_usuh1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8294, 6.91029, 173.919)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8294, 6.59954, 173.919)
 
 [node name="player" parent="." instance=ExtResource("2_ch1h5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8294, 7.44832, 175.831)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8294, 6.499, 175.831)
 script = ExtResource("4_vy6fh")
 
 [node name="Camera3D" type="Camera3D" parent="player"]
-transform = Transform3D(0.857167, 0.0493642, -0.512667, 0, 0.995396, 0.0958458, 0.515038, -0.0821558, 0.853221, -1.55147, 0.478958, 0.888453)
+transform = Transform3D(0.857167, 0.0493642, -0.512667, 0, 0.995396, 0.0958457, 0.515038, -0.0821558, 0.853221, -1.55147, 1.47369, 0.888458)
 current = true
 
 [node name="Control" type="Control" parent="player/Camera3D"]
@@ -172,7 +209,7 @@ shape = SubResource("ConcavePolygonShape3D_jva8u")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.54462, 36.4411, 0)
 
 [node name="spawnMarker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.573654, -0.48786, 10.6533, 180.724)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.573654, 3.93284, 7.1771, 180.724)
 
 [node name="Background" type="Node3D" parent="."]
 
@@ -251,5 +288,11 @@ transform = Transform3D(1.60568, 0, 0, 0, 1.84994, 0, 0, 0, 2.45966, 28.3631, 4.
 
 [node name="Node3D" parent="." instance=ExtResource("9_7pqwp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4598, 6.09815, 208.245)
+
+[node name="cameraAnimations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xdcyg")
+}
+autoplay = "RESET"
 
 [connection signal="pressed" from="player/Camera3D/Control/pauseBtn" to="." method="_on_pause_btn_pressed"]

@@ -7,6 +7,7 @@ var totalWeight=10
 var respawnRocks=true
 var playingGame=false
 var pausedGame=false
+var canMove=false
 
 func _physics_process(delta: float) -> void:
 	if Globals.weight>=Globals.totalWeight:

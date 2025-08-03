@@ -5,13 +5,13 @@ extends CharacterBody3D
 #@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var slingy: Node3D = $"../slingy"
 @onready var spawn_marker: Marker3D = $"../spawnMarker"
+@onready var animated_sprite_3d: AnimatedSprite3D = $AnimatedSprite3D
 
 var joint: Generic6DOFJoint3D
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 var push_force=80.0
 var grabbing:bool
-var canMove=true
 var timer=Timer.new()
 var camera_offset=Vector3(-1.551,0.479,0.888)
 
@@ -22,7 +22,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	#print(canMove)
-	if canMove:
+	if Globals.canMove:
 		if not is_on_floor():
 			velocity += get_gravity() * delta
 
@@ -36,9 +36,11 @@ func _physics_process(delta: float) -> void:
 		var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		#print(direction)
 		if direction:
+			animated_sprite_3d.play("walk")
 			velocity.x = direction.x * SPEED
 			velocity.z = direction.z * SPEED
 		else:
+			animated_sprite_3d.stop()
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			velocity.z = move_toward(velocity.z, 0, SPEED)
 
@@ -59,7 +61,7 @@ func _physics_process(delta: float) -> void:
 	if Globals.throw_ball:
 		Globals.throw_ball=false
 		#stop player from moving
-		canMove=false 
+		Globals.canMove=false 
 		#Camera view for throwing the ball
 		camera_view()
 		#after 3 seconds get spawn position
@@ -91,7 +93,7 @@ func spawn_position():
 	self.global_transform.origin = spawn_marker.global_transform.origin
 	#print(spawn_marker.transform.origin)
 	#print(self.position)
-	self.canMove=true
+	Globals.canMove=true
 	Globals.gateHit=false
 	if !Globals.gateHit:
 		rock.spawn_rock()
