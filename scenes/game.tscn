@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bou5ybxuppsop"]
+[gd_scene load_steps=24 format=3 uid="uid://bou5ybxuppsop"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_olvff"]
 [ext_resource type="PackedScene" uid="uid://bj6fg26iursll" path="res://scenes/mountain.tscn" id="1_v3044"]
@@ -46,6 +46,8 @@ material = SubResource("StandardMaterial3D_5xml6")
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jva8u"]
 data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_wq46v"]
 
 [node name="game" type="Node"]
 script = ExtResource("1_olvff")
@@ -252,4 +254,14 @@ transform = Transform3D(1.60568, 0, 0, 0, 1.84994, 0, 0, 0, 2.45966, 28.3631, 4.
 [node name="Node3D" parent="." instance=ExtResource("9_7pqwp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4598, 6.09815, 208.245)
 
+[node name="RockFreeArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="InfinitePlaneShape" type="CollisionShape3D" parent="RockFreeArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -103.035, 6.25906, 151.425)
+shape = SubResource("WorldBoundaryShape3D_wq46v")
+
 [connection signal="pressed" from="player/Camera3D/Control/pauseBtn" to="." method="_on_pause_btn_pressed"]
+[connection signal="body_entered" from="RockFreeArea" to="." method="_on_rock_free_area_body_entered"]

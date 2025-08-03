@@ -16,3 +16,10 @@ func start_game():
 #
 #func go_to_menu():
 	#pass
+
+func _on_rock_free_area_body_entered(body: Node3D) -> void:
+	if body is CollisionObject3D:
+		if body.get_collision_layer_value(5): # 5 corresponds to layer "free"
+			await get_tree().create_timer(3, false, true).timeout # wait 3 seconds before freeing
+			if is_instance_valid(body):
+				body.queue_free()

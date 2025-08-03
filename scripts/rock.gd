@@ -31,21 +31,12 @@ func _on_body_entered(body: Node) -> void:
 		slingshotCollide=true
 		AudioController.play_shoot()
 		#print("done")
-	
-	if body is RigidBody3D:
-		#print(body.get_children())
-		if body.has_node("obstacle"):
-			mass-=0.25
-		else:			
-			mass+=0.25
-			for child_node in get_children(): # cant directly scale RigidBody3D, so we scale children instead
-				if child_node is Node3D:
-					child_node.scale += Vector3.ONE * 0.015
-			body.queue_free()
-			print(mass)
-	
-			
-	if body.name=="gate" and !Globals.gateHit:
+	elif body is RigidBody3D:	
+		if body.get_collision_layer_value(3): # if small rock
+			on_hit_small_rock(body)
+		elif body.get_collision_layer_value(4): # if big rock
+			on_hit_big_rock(body)
+	elif body.name=="gate" and !Globals.gateHit:
 		print("hit!!")
 		Globals.gateHit=true
 		spawn_rock()
@@ -54,10 +45,24 @@ func _on_body_entered(body: Node) -> void:
 		slingshotCollide=false
 		Globals.weight+=self.mass
 		print(Globals.weight)
-	
 
-		
+func on_hit_small_rock(rock: RigidBody3D) -> void:
+	mass+=0.25
+	for child_node in get_children(): # cant directly scale RigidBody3D, so we scale children instead
+		if child_node is Node3D:
+			child_node.scale += Vector3.ONE * 0.015
+	rock.queue_free()
 
+func on_hit_big_rock(rock: RigidBody3D) -> void:
+	mass = maxf(mass - 0.25, 0.5)
+	for child_node in get_children(): # cant directly scale RigidBody3D, so we scale children instead
+		if child_node is Node3D:
+			child_node.scale = (child_node.scale - Vector3.ONE * 0.015).maxf(0.2)
+	rock.apply_central_impulse(global_position.direction_to(rock.global_position) * 15)
 	
-		
-	
+	# prevent falling off map when hit by big rock
+	linear_velocity = Vector3.ZERO
+	constant_force = Vector3.ZERO
+	angular_velocity = Vector3.ZERO
+	freeze = true
+	freeze = false

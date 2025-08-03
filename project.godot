@@ -54,6 +54,12 @@ escape={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="default"
+3d_physics/layer_4="big_rock"
+3d_physics/layer_5="free"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
