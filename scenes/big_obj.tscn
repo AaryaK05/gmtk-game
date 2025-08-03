@@ -26,3 +26,5 @@ shape = SubResource("ConcavePolygonShape3D_efkja")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(2.13703, 0, 0, 0, 2.13703, 0, 0, 0, 2.13703, 0.0867033, 0, -0.0486737)
 shape = SubResource("SphereShape3D_5mup1")
+
+[node name="obstacle" type="Node3D" parent="."]

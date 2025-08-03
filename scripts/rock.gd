@@ -22,22 +22,27 @@ func spawn_rock():
 	self.freeze=true
 
 func _on_body_entered(body: Node) -> void:
-	print(body.name)
+	#print(body.name)
 	if body.name=="slingMeshCollision" and !slingshotCollide:
 		Globals.throw_ball=true
 		self.global_transform.origin=slingshot_marker.global_transform.origin
 		self.apply_central_impulse(Vector3(0, 0, 1000))
 		player.grabbing=false
 		slingshotCollide=true
+		AudioController.play_shoot()
 		#print("done")
 	
 	if body is RigidBody3D:
-		mass+=0.25
-		for child_node in get_children(): # cant directly scale RigidBody3D, so we scale children instead
-			if child_node is Node3D:
-				child_node.scale += Vector3.ONE * 0.015
-		body.queue_free()
-		print(mass)
+		#print(body.get_children())
+		if body.has_node("obstacle"):
+			mass-=0.25
+		else:			
+			mass+=0.25
+			for child_node in get_children(): # cant directly scale RigidBody3D, so we scale children instead
+				if child_node is Node3D:
+					child_node.scale += Vector3.ONE * 0.015
+			body.queue_free()
+			print(mass)
 	
 			
 	if body.name=="gate" and !Globals.gateHit:
@@ -47,7 +52,6 @@ func _on_body_entered(body: Node) -> void:
 		#self.translate(ballOffset)
 		#self.freeze=true
 		slingshotCollide=false
-		
 		Globals.weight+=self.mass
 		print(Globals.weight)
 	

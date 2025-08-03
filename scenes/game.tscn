@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bou5ybxuppsop"]
+[gd_scene load_steps=23 format=3 uid="uid://bou5ybxuppsop"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_olvff"]
 [ext_resource type="PackedScene" uid="uid://bj6fg26iursll" path="res://scenes/mountain.tscn" id="1_v3044"]
@@ -7,7 +7,9 @@
 [ext_resource type="Script" path="res://scripts/player.gd" id="4_vy6fh"]
 [ext_resource type="PackedScene" uid="uid://dnglxpd1nepii" path="res://scenes/slingshot.tscn" id="5_7mr43"]
 [ext_resource type="PackedScene" uid="uid://bfsl86kk1n0sk" path="res://scenes/rock.tscn" id="5_usuh1"]
+[ext_resource type="Theme" uid="uid://cxt16q4pote33" path="res://assets/resource/labels.tres" id="7_33va5"]
 [ext_resource type="PackedScene" uid="uid://bqcmus1w1qco7" path="res://scenes/barrier.tscn" id="8_i8l62"]
+[ext_resource type="Theme" uid="uid://dnp5slwa8trkm" path="res://assets/resource/button.tres" id="8_w1gv6"]
 [ext_resource type="PackedScene" uid="uid://lqvdja8um638" path="res://scenes/gate.tscn" id="9_7pqwp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qqewi"]
@@ -45,7 +47,7 @@ material = SubResource("StandardMaterial3D_5xml6")
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jva8u"]
 data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
-[node name="game" type="Node3D"]
+[node name="game" type="Node"]
 script = ExtResource("1_olvff")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -68,6 +70,73 @@ script = ExtResource("4_vy6fh")
 
 [node name="Camera3D" type="Camera3D" parent="player"]
 transform = Transform3D(0.857167, 0.0493642, -0.512667, 0, 0.995396, 0.0958458, 0.515038, -0.0821558, 0.853221, -1.55147, 0.478958, 0.888453)
+current = true
+
+[node name="Control" type="Control" parent="player/Camera3D"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="player/Camera3D/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.0
+offset_top = -253.0
+offset_right = 72.0
+offset_bottom = -205.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_33va5")
+text = "PAUSED"
+
+[node name="pauseBtn" type="Button" parent="player/Camera3D/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = -48.0
+offset_right = 93.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("8_w1gv6")
+text = "Continue
+"
+vertical_icon_alignment = 0
+
+[node name="ColorRect" type="ColorRect" parent="player/Camera3D/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -579.0
+offset_top = -328.5
+offset_right = 579.0
+offset_bottom = 328.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+color = Color(0.252028, 0.252028, 0.252028, 0.215686)
 
 [node name="Timer" type="Timer" parent="player"]
 one_shot = true
@@ -182,3 +251,5 @@ transform = Transform3D(1.60568, 0, 0, 0, 1.84994, 0, 0, 0, 2.45966, 28.3631, 4.
 
 [node name="Node3D" parent="." instance=ExtResource("9_7pqwp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4598, 6.09815, 208.245)
+
+[connection signal="pressed" from="player/Camera3D/Control/pauseBtn" to="." method="_on_pause_btn_pressed"]

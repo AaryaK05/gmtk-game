@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxais32qo4h3x"]
+[gd_scene load_steps=6 format=3 uid="uid://dxais32qo4h3x"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_g528g"]
 [ext_resource type="Texture2D" uid="uid://kn0k1swmtfj6" path="res://assets/art/background/background.png" id="2_650pf"]
 [ext_resource type="Script" path="res://scripts/music_slider.gd" id="2_3045g"]
+[ext_resource type="Theme" uid="uid://dnp5slwa8trkm" path="res://assets/resource/button.tres" id="3_1wb3b"]
+[ext_resource type="Theme" uid="uid://cxt16q4pote33" path="res://assets/resource/labels.tres" id="4_2487d"]
 
 [node name="Menu" type="Node"]
 script = ExtResource("1_g528g")
@@ -24,9 +26,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Background" type="Sprite2D" parent="Control"]
-position = Vector2(979.976, 563.75)
+position = Vector2(978, 620.5)
 scale = Vector2(4.5834, 4.67708)
 texture = ExtResource("2_650pf")
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_right = 2002.0
+offset_bottom = 1231.0
+color = Color(0.337255, 0.313726, 0.6, 0.156863)
 
 [node name="Buttons" type="Node" parent="."]
 
@@ -34,26 +42,40 @@ texture = ExtResource("2_650pf")
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 81.0
-offset_top = -72.0
-offset_right = 479.0
-offset_bottom = 377.0
+offset_left = 48.0
+offset_top = -109.0
+offset_right = 295.0
+offset_bottom = 312.0
 grow_vertical = 2
-size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 10
 alignment = 1
 vertical = true
 
 [node name="playBtn" type="Button" parent="Buttons/main"]
 layout_mode = 2
+theme = ExtResource("3_1wb3b")
 text = "Play"
+vertical_icon_alignment = 0
+
+[node name="controlsBtn" type="Button" parent="Buttons/main"]
+layout_mode = 2
+theme = ExtResource("3_1wb3b")
+text = "Controls"
+vertical_icon_alignment = 0
 
 [node name="settingsBtn" type="Button" parent="Buttons/main"]
 layout_mode = 2
+theme = ExtResource("3_1wb3b")
 text = "Settings"
+vertical_icon_alignment = 0
 
 [node name="quitBtn" type="Button" parent="Buttons/main"]
+visible = false
 layout_mode = 2
+theme = ExtResource("3_1wb3b")
 text = "Quit"
+vertical_icon_alignment = 0
 
 [node name="settings" type="BoxContainer" parent="Buttons"]
 visible = false
@@ -62,10 +84,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -429.0
-offset_top = -148.5
-offset_right = 429.0
-offset_bottom = 148.5
+offset_left = -465.0
+offset_top = -267.0
+offset_right = 479.0
+offset_bottom = 217.0
 grow_horizontal = 2
 grow_vertical = 2
 vertical = true
@@ -73,11 +95,13 @@ vertical = true
 [node name="settingsLabel" type="Label" parent="Buttons/settings"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("4_2487d")
 text = "Settings"
 
 [node name="sliderContainer" type="GridContainer" parent="Buttons/settings"]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_horizontal = 0
+size_flags_vertical = 6
 columns = 2
 
 [node name="Labels" type="FlowContainer" parent="Buttons/settings/sliderContainer"]
@@ -86,10 +110,12 @@ size_flags_vertical = 4
 
 [node name="music" type="Label" parent="Buttons/settings/sliderContainer/Labels"]
 layout_mode = 2
+theme = ExtResource("4_2487d")
 text = "Music"
 
 [node name="sound" type="Label" parent="Buttons/settings/sliderContainer/Labels"]
 layout_mode = 2
+theme = ExtResource("4_2487d")
 text = "Sound"
 
 [node name="Sliders" type="Control" parent="Buttons/settings/sliderContainer"]
@@ -97,8 +123,9 @@ layout_mode = 2
 
 [node name="HSlider" type="HSlider" parent="Buttons/settings/sliderContainer/Sliders"]
 layout_mode = 2
+offset_top = 26.0
 offset_right = 748.0
-offset_bottom = 16.0
+offset_bottom = 42.0
 grow_horizontal = 2
 grow_vertical = 2
 max_value = 1.0
@@ -109,9 +136,10 @@ script = ExtResource("2_3045g")
 
 [node name="HSlider2" type="HSlider" parent="Buttons/settings/sliderContainer/Sliders"]
 layout_mode = 2
-offset_top = 20.0
-offset_right = 749.0
-offset_bottom = 36.0
+offset_left = 2.0
+offset_top = 72.0
+offset_right = 751.0
+offset_bottom = 88.0
 grow_horizontal = 2
 grow_vertical = 2
 max_value = 1.0
@@ -121,11 +149,55 @@ value = 1.0
 [node name="backBtn" type="Button" parent="Buttons/settings"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 6
+theme = ExtResource("3_1wb3b")
 text = "Back
 "
+vertical_icon_alignment = 0
+
+[node name="controls" type="BoxContainer" parent="Buttons"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -286.0
+offset_top = -100.0
+offset_right = 286.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 100
+vertical = true
+
+[node name="settingsLabel" type="Label" parent="Buttons/controls"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_2487d")
+text = "Controls
+"
+
+[node name="Label" type="Label" parent="Buttons/controls"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_2487d")
+text = "G : Grab Ball/Release Ball"
+
+[node name="cntrlbackBtn" type="Button" parent="Buttons/controls"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_1wb3b")
+text = "Back
+"
+vertical_icon_alignment = 0
 
 [connection signal="pressed" from="Buttons/main/playBtn" to="." method="_on_play_btn_pressed"]
+[connection signal="pressed" from="Buttons/main/controlsBtn" to="." method="_on_controls_btn_pressed"]
 [connection signal="pressed" from="Buttons/main/settingsBtn" to="." method="_on_settings_btn_pressed"]
 [connection signal="pressed" from="Buttons/main/quitBtn" to="." method="_on_quit_btn_pressed"]
 [connection signal="pressed" from="Buttons/settings/backBtn" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Buttons/controls/cntrlbackBtn" to="." method="_on_cntrlback_btn_pressed"]
