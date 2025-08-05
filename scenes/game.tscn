@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bou5ybxuppsop"]
+[gd_scene load_steps=34 format=3 uid="uid://bou5ybxuppsop"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_olvff"]
 [ext_resource type="PackedScene" uid="uid://bj6fg26iursll" path="res://scenes/mountain.tscn" id="1_v3044"]
@@ -11,6 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://bqcmus1w1qco7" path="res://scenes/barrier.tscn" id="8_i8l62"]
 [ext_resource type="Theme" uid="uid://dnp5slwa8trkm" path="res://assets/resource/button.tres" id="8_w1gv6"]
 [ext_resource type="PackedScene" uid="uid://lqvdja8um638" path="res://scenes/gate.tscn" id="9_7pqwp"]
+[ext_resource type="Texture2D" uid="uid://cccshpc0vrxag" path="res://assets/art/zeus/sprite_0.png" id="9_et7x6"]
+[ext_resource type="FontFile" uid="uid://2xmxncyes5mu" path="res://assets/fonts/Greek-Freak.otf" id="9_vv3mi"]
+[ext_resource type="Texture2D" uid="uid://cic53qjks4dfb" path="res://assets/art/zeus/sprite_1.png" id="10_85yir"]
+[ext_resource type="Texture2D" uid="uid://7mmn2fxq4fjw" path="res://assets/art/zeus/sprite_2.png" id="11_hr1s3"]
+[ext_resource type="Texture2D" uid="uid://73j5wco6wjd1" path="res://assets/art/zeus/sprite_3.png" id="12_6u7ru"]
+[ext_resource type="AudioStream" uid="uid://crvsf5qlhgey0" path="res://assets/music/Climbing.ogg" id="17_6oxv7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qqewi"]
 sky_top_color = Color(0.670588, 0.364706, 0.290196, 1)
@@ -25,6 +31,26 @@ sky_material = SubResource("ProceduralSkyMaterial_qqewi")
 background_mode = 2
 background_color = Color(0.678431, 0.47451, 0, 1)
 sky = SubResource("Sky_tjkj7")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4rila"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_et7x6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_85yir")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_hr1s3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_6u7ru")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_txljc"]
 
@@ -47,23 +73,9 @@ material = SubResource("StandardMaterial3D_5xml6")
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jva8u"]
 data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
-[sub_resource type="Animation" id="Animation_3oprj"]
-resource_name = "camer_pan_start"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("player/Camera3D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.96667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(-1.55147, 1.47369, 0.888458), Vector3(-1.551, 0.474, 0.888)]
-}
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_wq46v"]
 
-[sub_resource type="Animation" id="Animation_1i5gb"]
+[sub_resource type="Animation" id="Animation_p3b37"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -75,13 +87,101 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-1.55147, 1.47369, 0.888458)]
+"values": [Vector3(-0.979593, 1.44715, 1.06027)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player/Camera3D/dialogue:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("player/Camera3D/dialogue/RichTextLabel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("player/Camera3D/dialogue/RichTextLabel2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xdcyg"]
+[sub_resource type="Animation" id="Animation_sabha"]
+resource_name = "camera_start_pan"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player/Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.979593, 1.44715, 1.06027), Vector3(-0.979593, 0.313741, 1.06027)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player/Camera3D/dialogue:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 9.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("player/Camera3D/dialogue/RichTextLabel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 5.63333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("player/Camera3D/dialogue/RichTextLabel2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 4.56667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wu8a3"]
 _data = {
-"RESET": SubResource("Animation_1i5gb"),
-"camer_pan_start": SubResource("Animation_3oprj")
+"RESET": SubResource("Animation_p3b37"),
+"camera_start_pan": SubResource("Animation_sabha")
 }
 
 [node name="game" type="Node"]
@@ -96,20 +196,20 @@ transform = Transform3D(0.772212, -0.623749, -0.120934, 0.0648712, -0.11194, 0.9
 [node name="mountain" parent="." instance=ExtResource("1_v3044")]
 
 [node name="slingy" parent="." instance=ExtResource("5_7mr43")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08629, 35.4482, 0.450868)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08629, 35.0688, 29.6824)
 
 [node name="Rock" parent="." instance=ExtResource("5_usuh1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8294, 6.59954, 173.919)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.23967, 6.45219, 172.468)
 
 [node name="player" parent="." instance=ExtResource("2_ch1h5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8294, 6.499, 175.831)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.23967, 6.88973, 174.38)
 script = ExtResource("4_vy6fh")
 
 [node name="Camera3D" type="Camera3D" parent="player"]
-transform = Transform3D(0.857167, 0.0493642, -0.512667, 0, 0.995396, 0.0958457, 0.515038, -0.0821558, 0.853221, -1.55147, 1.47369, 0.888458)
+transform = Transform3D(0.928486, 0.035594, -0.369658, 0, 0.995396, 0.0958457, 0.371368, -0.0889914, 0.924211, -0.979593, 1.44715, 1.06027)
 current = true
 
-[node name="Control" type="Control" parent="player/Camera3D"]
+[node name="pause" type="Control" parent="player/Camera3D"]
 visible = false
 layout_mode = 3
 anchors_preset = 8
@@ -124,7 +224,7 @@ offset_bottom = 324.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="player/Camera3D/Control"]
+[node name="Label" type="Label" parent="player/Camera3D/pause"]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -141,7 +241,7 @@ grow_vertical = 2
 theme = ExtResource("7_33va5")
 text = "PAUSED"
 
-[node name="pauseBtn" type="Button" parent="player/Camera3D/Control"]
+[node name="pauseBtn" type="Button" parent="player/Camera3D/pause"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -159,7 +259,7 @@ text = "Continue
 "
 vertical_icon_alignment = 0
 
-[node name="ColorRect" type="ColorRect" parent="player/Camera3D/Control"]
+[node name="ColorRect" type="ColorRect" parent="player/Camera3D/pause"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -175,6 +275,108 @@ grow_vertical = 2
 size_flags_horizontal = 4
 color = Color(0.252028, 0.252028, 0.252028, 0.215686)
 
+[node name="dialogue" type="Control" parent="player/Camera3D"]
+visible = false
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_right = 576.0
+offset_bottom = 156.0
+grow_horizontal = 2
+
+[node name="ColorRect" type="ColorRect" parent="player/Camera3D/dialogue"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 268.0
+offset_right = -387.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.14588, 1.17557)
+color = Color(0.192157, 0.192157, 0.192157, 0.435294)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player/Camera3D/dialogue"]
+position = Vector2(745, 81)
+sprite_frames = SubResource("SpriteFrames_4rila")
+autoplay = "default"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="player/Camera3D/dialogue"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -265.0
+offset_top = -20.0
+offset_right = 73.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("9_vv3mi")
+text = "Zeus Bursts WITH LAUGHTER IN DELIGHT OF THE TOrRMENT HE'S UNLEASHED UPON Sisyphus.
+"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="player/Camera3D/dialogue"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -265.0
+offset_top = -18.0
+offset_right = 31.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("9_vv3mi")
+text = "Help the poor bloke escape this hellscape to safeguard the depleting remnants of his sanity."
+
+[node name="weightLeft" type="Label" parent="player/Camera3D"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("9_vv3mi")
+text = "Weight to Hit Gate:5kg"
+metadata/_edit_use_anchors_ = true
+
+[node name="gameOver" type="Label" parent="player/Camera3D"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.5
+offset_top = -9.5
+offset_right = 48.5
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_vv3mi")
+theme_override_font_sizes/font_size = 100
+text = "CURSE BROKEN!"
+
+[node name="result" type="Label" parent="player/Camera3D"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("9_vv3mi")
+
 [node name="Timer" type="Timer" parent="player"]
 one_shot = true
 
@@ -184,7 +386,7 @@ mesh = SubResource("PlaneMesh_txljc")
 surface_material_override/0 = SubResource("StandardMaterial3D_4c0gx")
 
 [node name="gate" type="StaticBody3D" parent="."]
-transform = Transform3D(-1.1059, 0, -9.66808e-08, 0, 1.1059, 0, 9.66808e-08, 0, -1.1059, 0, 0, 374.294)
+transform = Transform3D(-1.1059, 0, -9.66808e-08, 0, 1.1059, 0, 9.66808e-08, 0, -1.1059, 0, 0, 389.954)
 collision_layer = 129
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="gate"]
@@ -206,10 +408,10 @@ mesh = SubResource("PlaneMesh_gwuds")
 shape = SubResource("ConcavePolygonShape3D_jva8u")
 
 [node name="slingshotMarker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.54462, 36.4411, 0)
+transform = Transform3D(0.972533, 0, -0.232766, 0, 1, 0, 0.232766, 0, 0.972533, 0.554725, 46.0809, 14.656)
 
 [node name="spawnMarker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.573654, 3.93284, 7.1771, 180.724)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.573654, 4.61458, 6.37764, 174.025)
 
 [node name="Background" type="Node3D" parent="."]
 
@@ -289,10 +491,26 @@ transform = Transform3D(1.60568, 0, 0, 0, 1.84994, 0, 0, 0, 2.45966, 28.3631, 4.
 [node name="Node3D" parent="." instance=ExtResource("9_7pqwp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4598, 6.09815, 208.245)
 
+[node name="RockFreeArea" type="Area3D" parent="."]
+transform = Transform3D(2.28126, 0, 0, 0, 1, 0, 0, 0, 1, 78.5655, 0, 50.2055)
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="InfinitePlaneShape" type="CollisionShape3D" parent="RockFreeArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -103.035, 6.25906, 151.425)
+shape = SubResource("WorldBoundaryShape3D_wq46v")
+
 [node name="cameraAnimations" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_xdcyg")
+"": SubResource("AnimationLibrary_wu8a3")
 }
-autoplay = "RESET"
+autoplay = "camera_start_pan"
 
-[connection signal="pressed" from="player/Camera3D/Control/pauseBtn" to="." method="_on_pause_btn_pressed"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_6oxv7")
+autoplay = true
+bus = &"music"
+
+[connection signal="pressed" from="player/Camera3D/pause/pauseBtn" to="." method="_on_pause_btn_pressed"]
+[connection signal="body_entered" from="RockFreeArea" to="." method="_on_rock_free_area_body_entered"]

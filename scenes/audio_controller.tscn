@@ -1,28 +1,37 @@
 [gd_scene load_steps=7 format=3 uid="uid://bwt13qysm4wfb"]
 
-[ext_resource type="AudioStream" uid="uid://m1oiesv6s81b" path="res://assets/music/Sisyphus Groove.mp3" id="1_c1551"]
 [ext_resource type="Script" path="res://scripts/audio_controller.gd" id="1_xaec8"]
 [ext_resource type="AudioStream" uid="uid://c1xbmqaa52rga" path="res://assets/sfx/rock push.wav" id="3_rfakd"]
 [ext_resource type="AudioStream" uid="uid://jrdf5hf2jiby" path="res://assets/sfx/pick up.wav" id="4_qot3q"]
 [ext_resource type="AudioStream" uid="uid://da7ak2nfifhuv" path="res://assets/sfx/slingshot pull.wav" id="5_5ie1d"]
+[ext_resource type="AudioStream" uid="uid://bqv81w3wfoq6y" path="res://assets/sfx/breakdoor.wav" id="6_4551e"]
 [ext_resource type="AudioStream" uid="uid://c1i2u3w4kers8" path="res://assets/sfx/slingshot shoot.wav" id="6_xac0l"]
 
 [node name="audio_controller" type="Node"]
 script = ExtResource("1_xaec8")
 
 [node name="music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_c1551")
 autoplay = true
 bus = &"music"
 
 [node name="push" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_rfakd")
+pitch_scale = 0.8
+bus = &"sfx"
 
 [node name="pick" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_qot3q")
+volume_db = 2.0
+pitch_scale = 2.08
+bus = &"sfx"
 
 [node name="stretch" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_5ie1d")
+bus = &"sfx"
 
 [node name="shoot" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_xac0l")
+bus = &"sfx"
+
+[node name="hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_4551e")

@@ -1,12 +1,11 @@
 extends Node
 #@onready var control: Control = $player/Camera3D/Control
-#@onready var camera_animations: AnimationPlayer = $cameraAnimations
 
 func start_game():
 	if !Globals.playingGame:
+		#AudioController.play_music()
 		get_tree().change_scene_to_file("res://scenes/game.tscn")
-		#camera_animations.play("camer_pan_start")
-		Globals.canMove=true
+#
 #func _physics_process(delta: float) -> void:
 	#if Input.is_action_just_pressed("escape"):
 		#_on_pause_btn_pressed()	
@@ -18,3 +17,10 @@ func start_game():
 #
 #func go_to_menu():
 	#pass
+
+func _on_rock_free_area_body_entered(body: Node3D) -> void:
+	if body is CollisionObject3D:
+		if body.get_collision_layer_value(5): # 5 corresponds to layer "free"
+			await get_tree().create_timer(3, false, true).timeout # wait 3 seconds before freeing
+			if is_instance_valid(body):
+				body.queue_free()

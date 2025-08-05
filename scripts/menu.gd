@@ -6,7 +6,6 @@ extends Node
 
 
 func _ready() -> void:
-	AudioController.play_music()
 	main.visible=true
 	settings.visible=false
 	

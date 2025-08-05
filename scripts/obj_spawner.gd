@@ -5,7 +5,7 @@ extends Node3D
 
 var rnd=RandomNumberGenerator.new()
 var spawn_number=2
-var spawn_big_number=10
+var spawn_big_number=9
 var timer=Timer.new()
 
 func _ready() -> void:
@@ -15,7 +15,7 @@ func _ready() -> void:
 	
 func reSpawn():
 	spawn()
-	timer.start(10)
+	timer.start(14)
 
 
 func spawn():

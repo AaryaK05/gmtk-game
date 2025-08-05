@@ -5,15 +5,19 @@ extends CharacterBody3D
 #@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var slingy: Node3D = $"../slingy"
 @onready var spawn_marker: Marker3D = $"../spawnMarker"
+@onready var slingshot_marker: Marker3D = $"../slingshotMarker"
 @onready var animated_sprite_3d: AnimatedSprite3D = $AnimatedSprite3D
+@onready var game_over: Label = $Camera3D/gameOver
+@onready var result: Label = $Camera3D/result
 
 var joint: Generic6DOFJoint3D
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 var push_force=80.0
 var grabbing:bool
+var canMove=true
 var timer=Timer.new()
-var camera_offset=Vector3(-1.551,0.479,0.888)
+var camera_offset=Vector3(-1.351,0.479,2.888)
 
 func _ready() -> void:
 	add_child(timer)
@@ -22,7 +26,12 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	#print(canMove)
-	if Globals.canMove:
+	if Globals.winGame:
+		result.visible=false
+		game_over.visible=true
+		get_tree().paused=true
+	
+	if canMove:
 		if not is_on_floor():
 			velocity += get_gravity() * delta
 
@@ -32,7 +41,7 @@ func _physics_process(delta: float) -> void:
 
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
-		var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		var input_dir := Input.get_vector("left", "right", "forward", "back")
 		var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		#print(direction)
 		if direction:
@@ -61,11 +70,11 @@ func _physics_process(delta: float) -> void:
 	if Globals.throw_ball:
 		Globals.throw_ball=false
 		#stop player from moving
-		Globals.canMove=false 
+		canMove=false 
 		#Camera view for throwing the ball
 		camera_view()
 		#after 3 seconds get spawn position
-		timer.start(3)		
+		timer.start(10)		
 		
 		
 	
@@ -82,25 +91,30 @@ func ball_throwing_anim():
 	spawn_position()
 
 func camera_view():
-	camera_3d.position.x=slingy.position.x
-	camera_3d.position.y=slingy.position.y -10
-	camera_3d.position.z=slingy.position.z - 25
+	#camera_3d.position.x=slingy.position.x
+	#camera_3d.position.y=slingy.position.y -10
+	#camera_3d.position.z=slingy.position.z - 25
+	camera_3d.global_transform.origin = slingshot_marker.global_transform.origin
 	#print(camera_3d.position)
 	#print(camera_3d.rotation)
-	camera_3d.rotate_y(179.6)
+	camera_3d.rotation_degrees.y=-180
 	
 func spawn_position():
+	result.visible=false
 	self.global_transform.origin = spawn_marker.global_transform.origin
 	#print(spawn_marker.transform.origin)
 	#print(self.position)
-	Globals.canMove=true
+	self.canMove=true
 	Globals.gateHit=false
 	if !Globals.gateHit:
 		rock.spawn_rock()
 	Globals.respawnRocks=true
 	camera_3d.global_transform = spawn_marker.global_transform 
 	camera_3d.translate(camera_offset)
-	camera_3d.rotation_degrees.y=-31
+	camera_3d.rotation_degrees.x=-5.5
+	camera_3d.rotation_degrees.y=-21.8
 	rock.freeze=false
 	
+
+
 	

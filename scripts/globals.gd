@@ -7,9 +7,13 @@ var totalWeight=10
 var respawnRocks=true
 var playingGame=false
 var pausedGame=false
-var canMove=false
+var winGame=false
+
+var totalGateWeightNeeded=5
 
 func _physics_process(delta: float) -> void:
-	if Globals.weight>=Globals.totalWeight:
+	if totalGateWeightNeeded<=0:
 		print("Game over!")
-		get_tree().quit()
+		#game_over.visible=true
+		winGame=true
+		

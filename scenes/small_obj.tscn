@@ -12,6 +12,7 @@ data = PackedVector3Array(0.4659, -0.9328, 0.3377, 0, -1, 0, -0.1808, -0.9346, 0
 radius = 0.312983
 
 [node name="smallObj" type="RigidBody3D"]
+collision_layer = 21
 
 [node name="Rock" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.205422, 0, 0, 0, 0.205422, 0, 0, 0, 0.205422, 0.0858607, -0.00693753, -0.0439638)
