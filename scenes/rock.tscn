@@ -2,15 +2,15 @@
 
 [ext_resource type="ArrayMesh" uid="uid://vahbydh8dr3f" path="res://assets/art/rock/rock.obj" id="1_c21h5"]
 [ext_resource type="Script" path="res://scripts/rock.gd" id="1_tbyfy"]
-[ext_resource type="Texture2D" uid="uid://da2dq2eeqiif6" path="res://assets/art/rock/sprite_0.png" id="3_a0r3u"]
+[ext_resource type="Texture2D" uid="uid://da2dq2eeqiif6" path="res://assets/art/rock/sprite_0.png" id="3_4fi8v"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x0sma"]
 rough = true
 absorbent = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_huxa2"]
-albedo_color = Color(0.470588, 0.345098, 0, 1)
-albedo_texture = ExtResource("3_a0r3u")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u7211"]
+albedo_color = Color(0.600509, 0.403326, 0.16801, 1)
+albedo_texture = ExtResource("3_4fi8v")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tnbka"]
 
@@ -18,19 +18,20 @@ albedo_texture = ExtResource("3_a0r3u")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0147268, 0.00636691, 0.0248586)
 collision_layer = 2
 collision_mask = 129
+mass = 15.0
 physics_material_override = SubResource("PhysicsMaterial_x0sma")
 contact_monitor = true
 max_contacts_reported = 100
 script = ExtResource("1_tbyfy")
 
 [node name="Rock" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.245415, -0.23403, -0.00045362, 0.23403, -0.245416, 0.000172552, -0.000447365, -0.000188177, 0.339115, 0.0143632, 0.0094282, -0.0103281)
+transform = Transform3D(-0.313638, -0.299088, -0.000579722, 0.299088, -0.313639, 0.00022052, -0.000571728, -0.000240488, 0.433385, 0.0143632, 0.0094282, -0.0103281)
 layers = 9
 mesh = ExtResource("1_c21h5")
-surface_material_override/0 = SubResource("StandardMaterial3D_huxa2")
+surface_material_override/0 = SubResource("StandardMaterial3D_u7211")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.574381, 0, 0, 0, 0.574381, 0, 0, 0, 0.574381, -0.00828633, 0, -0.00832498)
+transform = Transform3D(0.884152, 0, 0, 0, 0.884152, 0, 0, 0, 0.884152, -0.00828633, 0, -0.00832498)
 shape = SubResource("SphereShape3D_tnbka")
 
 [node name="rockColliderDetector" type="Area3D" parent="."]
@@ -38,7 +39,7 @@ collision_layer = 8
 collision_mask = 16
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="rockColliderDetector"]
-transform = Transform3D(0.550794, 0, 0, 0, 0.550794, 0, 0, 0, 0.550794, -0.00828633, 0, -0.00832498)
+transform = Transform3D(0.896072, 0, 0, 0, 0.896072, 0, 0, 0, 0.896072, -0.00828633, 0, -0.00832498)
 shape = SubResource("SphereShape3D_tnbka")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

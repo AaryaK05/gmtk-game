@@ -9,11 +9,12 @@ var playingGame=false
 var pausedGame=false
 var winGame=false
 
-var totalGateWeightNeeded=5
+var totalGateWeightNeeded=30
 
 func _physics_process(delta: float) -> void:
 	if totalGateWeightNeeded<=0:
-		print("Game over!")
+		#print("Game over!")
 		#game_over.visible=true
 		winGame=true
+		totalGateWeightNeeded=1
 		

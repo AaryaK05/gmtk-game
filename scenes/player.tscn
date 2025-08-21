@@ -1,14 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dsv8ap28bn58"]
+[gd_scene load_steps=8 format=3 uid="uid://dsv8ap28bn58"]
 
 [ext_resource type="Texture2D" uid="uid://cxeg4f47s6x6d" path="res://assets/art/player/sprite_0.png" id="1_sbr4e"]
 [ext_resource type="Texture2D" uid="uid://cvaymxu87myh6" path="res://assets/art/player/sprite_1.png" id="2_1kpuw"]
 [ext_resource type="Texture2D" uid="uid://drmmu8n2x27om" path="res://assets/art/player/sprite_2.png" id="3_dfdle"]
 [ext_resource type="Texture2D" uid="uid://drr8tq7d6nwya" path="res://assets/art/player/sprite_3.png" id="4_pxcbg"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_wbnbc"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kqrl0"]
-albedo_color = Color(0.223529, 1, 1, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7uxdl"]
 
@@ -41,12 +36,6 @@ animations = [{
 
 [node name="player" type="CharacterBody3D"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.458828, 0, 0, 0, 0.476402, 0, 0, 0, 0.476402, 0, 0, 0)
-visible = false
-mesh = SubResource("CapsuleMesh_wbnbc")
-surface_material_override/0 = SubResource("StandardMaterial3D_kqrl0")
-
 [node name="playerColliderDetector" type="Area3D" parent="."]
 transform = Transform3D(1.64566, 0, 0, 0, 1.64566, 0, 0, 0, 1.64566, 0, -0.27489, 0)
 collision_mask = 8
@@ -61,8 +50,9 @@ shape = SubResource("CapsuleShape3D_yabjq")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(6.71718, 0, 0, 0, 5.82164, 0, 0, 0, 6.71718, 0, 0, 0)
+billboard = 1
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_n36gm")
 animation = &"walk"
-frame = 2
-frame_progress = 0.604443
+frame = 3
+frame_progress = 0.845068

@@ -1,8 +1,8 @@
-[gd_scene load_steps=34 format=3 uid="uid://bou5ybxuppsop"]
+[gd_scene load_steps=35 format=3 uid="uid://bou5ybxuppsop"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_olvff"]
 [ext_resource type="PackedScene" uid="uid://bj6fg26iursll" path="res://scenes/mountain.tscn" id="1_v3044"]
-[ext_resource type="Script" path="res://scripts/obj_spawner.gd" id="2_1p5j0"]
+[ext_resource type="Script" path="res://scripts/RockSpawner.gd" id="2_1p5j0"]
 [ext_resource type="PackedScene" uid="uid://dsv8ap28bn58" path="res://scenes/player.tscn" id="2_ch1h5"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="4_vy6fh"]
 [ext_resource type="PackedScene" uid="uid://dnglxpd1nepii" path="res://scenes/slingshot.tscn" id="5_7mr43"]
@@ -52,10 +52,124 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_egqr1"]
+size = Vector3(1.58594, 1, 1.39307)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_wq46v"]
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_txljc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4c0gx"]
 albedo_color = Color(0.862745, 0.388235, 0.054902, 1)
+
+[sub_resource type="Animation" id="Animation_p3b37"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player/Camera3D/dialogue/RichTextLabel2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player/Camera3D/dialogue/RichTextLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("player/Camera3D/dialogue:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("player/Camera3D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.979593, 1.44715, 1.06027)]
+}
+
+[sub_resource type="Animation" id="Animation_sabha"]
+resource_name = "camera_start_pan"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player/Camera3D/dialogue/RichTextLabel2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4.56667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player/Camera3D/dialogue/RichTextLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5.63333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("player/Camera3D/dialogue:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 9.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("player/Camera3D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.979593, 1.44715, 1.06027), Vector3(-0.979593, 0.313741, 1.06027)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wu8a3"]
+_data = {
+"RESET": SubResource("Animation_p3b37"),
+"camera_start_pan": SubResource("Animation_sabha")
+}
 
 [sub_resource type="BoxMesh" id="BoxMesh_q7ukp"]
 
@@ -73,117 +187,6 @@ material = SubResource("StandardMaterial3D_5xml6")
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jva8u"]
 data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_wq46v"]
-
-[sub_resource type="Animation" id="Animation_p3b37"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("player/Camera3D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.979593, 1.44715, 1.06027)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("player/Camera3D/dialogue:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("player/Camera3D/dialogue/RichTextLabel:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("player/Camera3D/dialogue/RichTextLabel2:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_sabha"]
-resource_name = "camera_start_pan"
-length = 10.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("player/Camera3D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(-0.979593, 1.44715, 1.06027), Vector3(-0.979593, 0.313741, 1.06027)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("player/Camera3D/dialogue:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 9.96667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("player/Camera3D/dialogue/RichTextLabel:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 5.63333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("player/Camera3D/dialogue/RichTextLabel2:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 4.56667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wu8a3"]
-_data = {
-"RESET": SubResource("Animation_p3b37"),
-"camera_start_pan": SubResource("Animation_sabha")
-}
-
 [node name="game" type="Node"]
 script = ExtResource("1_olvff")
 
@@ -193,24 +196,16 @@ environment = SubResource("Environment_cmf3c")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.772212, -0.623749, -0.120934, 0.0648712, -0.11194, 0.991595, -0.632044, -0.773567, -0.045978, 26.8889, 99.8103, 89.8313)
 
-[node name="mountain" parent="." instance=ExtResource("1_v3044")]
-
-[node name="slingy" parent="." instance=ExtResource("5_7mr43")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08629, 35.0688, 29.6824)
-
-[node name="Rock" parent="." instance=ExtResource("5_usuh1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.23967, 6.45219, 172.468)
-
 [node name="player" parent="." instance=ExtResource("2_ch1h5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.23967, 6.88973, 174.38)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.39639, 7.0699, 172.955)
 script = ExtResource("4_vy6fh")
 
 [node name="Camera3D" type="Camera3D" parent="player"]
-transform = Transform3D(0.928486, 0.035594, -0.369658, 0, 0.995396, 0.0958457, 0.371368, -0.0889914, 0.924211, -0.979593, 1.44715, 1.06027)
+transform = Transform3D(0.972111, 0.035594, -0.231804, -0.013831, 0.995396, 0.0948425, 0.234113, -0.0889914, 0.968128, -0.979593, 1.44715, 1.06027)
 current = true
 
 [node name="pause" type="Control" parent="player/Camera3D"]
-visible = false
+process_mode = 2
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -223,41 +218,9 @@ offset_right = 576.0
 offset_bottom = 324.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Label" type="Label" parent="player/Camera3D/pause"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -71.0
-offset_top = -253.0
-offset_right = 72.0
-offset_bottom = -205.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("7_33va5")
-text = "PAUSED"
-
-[node name="pauseBtn" type="Button" parent="player/Camera3D/pause"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -93.0
-offset_top = -48.0
-offset_right = 93.0
-offset_bottom = 48.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("8_w1gv6")
-text = "Continue
-"
-vertical_icon_alignment = 0
+mouse_filter = 2
+mouse_default_cursor_shape = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="player/Camera3D/pause"]
 layout_mode = 1
@@ -273,7 +236,84 @@ offset_bottom = 328.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-color = Color(0.252028, 0.252028, 0.252028, 0.215686)
+mouse_filter = 2
+color = Color(0.137255, 0.137255, 0.137255, 0.478431)
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="player/Camera3D/pause"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.0
+offset_top = -253.0
+offset_right = 72.0
+offset_bottom = -205.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_33va5")
+text = "PAUSED"
+metadata/_edit_use_anchors_ = true
+
+[node name="continueBtn" type="Button" parent="player/Camera3D/pause"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.0
+offset_top = -14.0
+offset_right = 88.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("8_w1gv6")
+text = "Continue
+"
+vertical_icon_alignment = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="restartBtn" type="Button" parent="player/Camera3D/pause"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -113.0
+offset_top = -190.0
+offset_right = 100.0
+offset_bottom = -46.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("8_w1gv6")
+text = "Restart
+
+"
+vertical_icon_alignment = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="backToMenuBtn" type="Button" parent="player/Camera3D/pause"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -145.0
+offset_top = 107.0
+offset_right = 139.0
+offset_bottom = 203.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("8_w1gv6")
+text = "Back to Menu
+"
+vertical_icon_alignment = 0
+metadata/_edit_use_anchors_ = true
 
 [node name="dialogue" type="Control" parent="player/Camera3D"]
 visible = false
@@ -380,119 +420,122 @@ theme_override_fonts/font = ExtResource("9_vv3mi")
 [node name="Timer" type="Timer" parent="player"]
 one_shot = true
 
-[node name="land" type="MeshInstance3D" parent="."]
-transform = Transform3D(1066.79, 0, 0, 0, 2.08824, 0, 0, 0, 1813.59, 0, -120.944, 0)
-mesh = SubResource("PlaneMesh_txljc")
-surface_material_override/0 = SubResource("StandardMaterial3D_4c0gx")
+[node name="Rock" parent="." instance=ExtResource("5_usuh1")]
+transform = Transform3D(2.4277, 0, 0, 0, 2.4277, 0, 0, 0, 2.4277, 5.2638, 6.9034, 171.043)
+collision_layer = 66
 
-[node name="gate" type="StaticBody3D" parent="."]
-transform = Transform3D(-1.1059, 0, -9.66808e-08, 0, 1.1059, 0, 9.66808e-08, 0, -1.1059, 0, 0, 389.954)
-collision_layer = 129
+[node name="mountain" parent="." instance=ExtResource("1_v3044")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.70035, 8.38155, 17.3977)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="gate"]
-transform = Transform3D(367.866, 0, -7.10543e-15, 0, 192.779, 0, 0, 0, 1, -2.63657e-06, 0, 156.464)
-mesh = SubResource("BoxMesh_q7ukp")
-surface_material_override/0 = SubResource("StandardMaterial3D_ibv2n")
+[node name="slingy" parent="." instance=ExtResource("5_7mr43")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.66549, 56.8929, 44.6315)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="gate"]
-transform = Transform3D(217.141, 0, 0, 0, 217.141, 0, 0, 0, 217.141, -0.309177, 0, 19.1452)
-shape = SubResource("BoxShape3D_cwv5k")
-
-[node name="spawnArea" type="MeshInstance3D" parent="."]
-transform = Transform3D(163.13, 0, 0, 0, 3.65426, 0, 0, 0, 241.454, 11.8374, 6.09815, 100.524)
-mesh = SubResource("PlaneMesh_gwuds")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="spawnArea"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="spawnArea/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_jva8u")
-
-[node name="slingshotMarker" type="Marker3D" parent="."]
-transform = Transform3D(0.972533, 0, -0.232766, 0, 1, 0, 0.232766, 0, 0.972533, 0.554725, 46.0809, 14.656)
-
-[node name="spawnMarker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.573654, 4.61458, 6.37764, 174.025)
-
-[node name="Background" type="Node3D" parent="."]
-
-[node name="mountain2" parent="Background" instance=ExtResource("1_v3044")]
-transform = Transform3D(1.93765, 0, 0, 0, 2.03577, 0, 0, 0, 1, 227.223, -1.00478, -123.226)
-
-[node name="mountain3" parent="Background" instance=ExtResource("1_v3044")]
-transform = Transform3D(1.93765, 0, 0, 0, 1.06429, 0, 0, 0, 1, 322.281, 1.04038, 127.805)
-
-[node name="mountain4" parent="Background" instance=ExtResource("1_v3044")]
-transform = Transform3D(1.93765, 0, 0, 0, 1.97215, 0, 0, 0, 1, -270.129, -2.1951, -137.062)
+[node name="door" parent="." instance=ExtResource("9_7pqwp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4598, 6.09815, 208.245)
 
 [node name="spawners" type="Node3D" parent="."]
 
-[node name="objSpawner" type="Marker3D" parent="spawners"]
-transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 7.03965, 32.9432, 45.5442)
+[node name="level1" type="Area3D" parent="spawners"]
+transform = Transform3D(0.845944, 0, 0, 0, 0.943031, 0.155677, 0, -0.332704, 0.441258, 2.27312, 16.1846, 153.099)
+collision_mask = 65
 script = ExtResource("2_1p5j0")
 
-[node name="objSpawner2" type="Marker3D" parent="spawners"]
-transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, -9.97625, 27.4701, 59.1228)
+[node name="area" type="CollisionShape3D" parent="spawners/level1"]
+transform = Transform3D(41.0848, 0, 0, 0, 9.7665, -12.1693, 0, 4.02008, 29.5645, 0, 0, 0)
+shape = SubResource("BoxShape3D_egqr1")
+
+[node name="level2" type="Area3D" parent="spawners"]
+transform = Transform3D(0.845944, 0, 0, 0, 1, 0, 0, 0, 0.467915, 2.27312, 17.3884, 147.879)
+collision_mask = 65
 script = ExtResource("2_1p5j0")
 
-[node name="objSpawner3" type="Marker3D" parent="spawners"]
-transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 3.63347, 32.6247, 45.0129)
+[node name="area" type="CollisionShape3D" parent="spawners/level2"]
+transform = Transform3D(41.0848, 0, 0, 0, 7.79167, -3.99727, 0, 2.08952, 14.9055, 0, -10.5342, 18.2833)
+shape = SubResource("BoxShape3D_egqr1")
+
+[node name="level3" type="Area3D" parent="spawners"]
+transform = Transform3D(0.715622, 0, 0, 0, 1, 0, 0, 0, 0.218944, 4.19606, 21.562, 140.293)
+collision_mask = 65
 script = ExtResource("2_1p5j0")
 
-[node name="objSpawner4" type="Marker3D" parent="spawners"]
-transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, -5.1053, 21.6265, 102.377)
+[node name="area" type="CollisionShape3D" parent="spawners/level3"]
+transform = Transform3D(41.0848, 0, 0, 0, 7.48349, -1.85915, 0, 0.961577, 14.4688, 0, -13.5826, 64.11)
+shape = SubResource("BoxShape3D_egqr1")
+
+[node name="level4" type="Area3D" parent="spawners"]
+transform = Transform3D(0.715622, 0, 0, 0, 1, 0, 0, 0, 0.218944, 3.92493, 24.2544, 132.037)
+collision_mask = 65
 script = ExtResource("2_1p5j0")
 
-[node name="objSpawner5" type="Marker3D" parent="spawners"]
-transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 22.9742, 23.6777, 94.2902)
+[node name="area" type="CollisionShape3D" parent="spawners/level4"]
+transform = Transform3D(41.0848, 0, 0, 0, 7.48349, -1.85915, 0, 0.961577, 14.4688, 0, -9.57748, 43.5125)
+shape = SubResource("BoxShape3D_egqr1")
+
+[node name="level5" type="Area3D" parent="spawners"]
+transform = Transform3D(0.715622, 0, 0, 0, 1, 0, 0, 0, 0.218944, 4.19606, 30.5071, 120.43)
+collision_mask = 65
 script = ExtResource("2_1p5j0")
 
-[node name="objSpawner6" type="Marker3D" parent="spawners"]
-transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 12.4352, 18.6874, 122.985)
+[node name="area" type="CollisionShape3D" parent="spawners/level5"]
+transform = Transform3D(41.0848, 0, 0, 0, 7.48349, -1.85915, 0, 0.961577, 14.4688, 0, -9.57748, 43.5125)
+shape = SubResource("BoxShape3D_egqr1")
+
+[node name="level6" type="Area3D" parent="spawners"]
+transform = Transform3D(0.715622, 0, 0, 0, 1, 0, 0, 0, 0.218944, 4.19606, 32.8072, 113.522)
+collision_mask = 65
 script = ExtResource("2_1p5j0")
 
-[node name="objSpawner7" type="Marker3D" parent="spawners"]
-transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 11.1789, 32.9432, 48.6391)
+[node name="area" type="CollisionShape3D" parent="spawners/level6"]
+transform = Transform3D(41.0848, 0, 0, 0, 7.48349, -1.85915, 0, 0.961577, 14.4688, 0, -9.57748, 43.5125)
+shape = SubResource("BoxShape3D_egqr1")
+
+[node name="level7" type="Area3D" parent="spawners"]
+transform = Transform3D(0.715622, 0, 0, 0, 1, 0, 0, 0, 0.218944, 4.19606, 34.6056, 107.359)
+collision_mask = 65
 script = ExtResource("2_1p5j0")
 
-[node name="objSpawner8" type="Marker3D" parent="spawners"]
-transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 2.47434, 24.8096, 73.1705)
+[node name="area" type="CollisionShape3D" parent="spawners/level7"]
+transform = Transform3D(41.0848, 0, 0, 0, 7.48349, -1.85915, 0, 0.961577, 14.4688, 0, -9.57748, 43.5125)
+shape = SubResource("BoxShape3D_egqr1")
+
+[node name="level8" type="Area3D" parent="spawners"]
+transform = Transform3D(0.715622, 0, 0, 0, 1, 0, 0, 0, 0.218944, 4.19606, 38.8335, 98.6611)
+collision_mask = 65
 script = ExtResource("2_1p5j0")
 
-[node name="objSpawner9" type="Marker3D" parent="spawners"]
-transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 22.7612, 25.9969, 62.8849)
+[node name="area" type="CollisionShape3D" parent="spawners/level8"]
+transform = Transform3D(41.0848, 0, 0, 0, 7.48349, -1.85915, 0, 0.961577, 14.4688, 0, -9.57748, 43.5125)
+shape = SubResource("BoxShape3D_egqr1")
+
+[node name="level9" type="Area3D" parent="spawners"]
+transform = Transform3D(0.715622, 0, 0, 0, 1, 0, 0, 0, 0.218944, 4.19606, 43.6401, 84.9875)
+collision_mask = 65
 script = ExtResource("2_1p5j0")
 
-[node name="objSpawner10" type="Marker3D" parent="spawners"]
-transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, -1.74779, 21.6265, 102.377)
+[node name="area" type="CollisionShape3D" parent="spawners/level9"]
+transform = Transform3D(41.0848, 0, 0, 0, 7.48349, -1.85915, 0, 0.961577, 14.4688, 0, -9.57748, 43.5125)
+shape = SubResource("BoxShape3D_egqr1")
+
+[node name="level10" type="Area3D" parent="spawners"]
+transform = Transform3D(0.715622, 0, 0, 0, 1, 0, 0, 0, 0.218944, 4.19606, 48.7339, 73.9933)
+collision_mask = 65
 script = ExtResource("2_1p5j0")
 
-[node name="objSpawner11" type="Marker3D" parent="spawners"]
-transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 25.4939, 23.6777, 93.5733)
+[node name="area" type="CollisionShape3D" parent="spawners/level10"]
+transform = Transform3D(41.0848, 0, 0, 0, 7.48349, -1.85915, 0, 0.961577, 14.4688, 0, -9.57748, 43.5125)
+shape = SubResource("BoxShape3D_egqr1")
+
+[node name="level11" type="Area3D" parent="spawners"]
+transform = Transform3D(0.715622, 0, 0, 0, 1, 0, 0, 0, 0.218944, 5.26759, 53.5949, 63.9996)
+collision_mask = 65
 script = ExtResource("2_1p5j0")
 
-[node name="objSpawner12" type="Marker3D" parent="spawners"]
-transform = Transform3D(0.993651, -0.11251, 0, 0.11251, 0.993651, 0, 0, 0, 1, 9.53907, 18.7206, 122.615)
-script = ExtResource("2_1p5j0")
-
-[node name="other" type="Node3D" parent="."]
-
-[node name="Barrier" parent="other" instance=ExtResource("8_i8l62")]
-transform = Transform3D(1.60568, 0, 0, 0, 1, 0, 0, 0, 4.72957, -39.6179, 4.75482, 161.675)
-
-[node name="Barrier4" parent="other" instance=ExtResource("8_i8l62")]
-transform = Transform3D(0.859886, 0, 0, 0, 1, 0, 0, 0, 1.24019, -48.7027, 4.75482, 192.763)
-
-[node name="Barrier2" parent="other" instance=ExtResource("8_i8l62")]
-transform = Transform3D(1.60568, 0, 0, 0, 1, 0, 0, 0, 2.45966, 35.4077, 4.75482, 161.675)
-
-[node name="Barrier3" parent="other" instance=ExtResource("8_i8l62")]
-transform = Transform3D(1.60568, 0, 0, 0, 1.84994, 0, 0, 0, 2.45966, 28.3631, 4.9573, 187.597)
-
-[node name="Node3D" parent="." instance=ExtResource("9_7pqwp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4598, 6.09815, 208.245)
+[node name="area" type="CollisionShape3D" parent="spawners/level11"]
+transform = Transform3D(41.0848, 0, 0, 0, 7.48349, -1.85915, 0, 0.961577, 14.4688, 0, -9.57748, 43.5125)
+shape = SubResource("BoxShape3D_egqr1")
 
 [node name="RockFreeArea" type="Area3D" parent="."]
-transform = Transform3D(2.28126, 0, 0, 0, 1, 0, 0, 0, 1, 78.5655, 0, 50.2055)
+transform = Transform3D(2.28126, 0, 0, 0, 1, 0, 0, 0, 1, 78.5655, 8.42845, 50.2055)
 collision_layer = 0
 collision_mask = 16
 monitorable = false
@@ -501,16 +544,99 @@ monitorable = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -103.035, 6.25906, 151.425)
 shape = SubResource("WorldBoundaryShape3D_wq46v")
 
-[node name="cameraAnimations" type="AnimationPlayer" parent="."]
+[node name="Background" type="Node3D" parent="."]
+
+[node name="mountain2" parent="Background" instance=ExtResource("1_v3044")]
+transform = Transform3D(1.34485, 0, 0, 0, 1.8308, 0, 0, 0, 0.903822, 227.223, -1.00478, -152.508)
+
+[node name="mountain3" parent="Background" instance=ExtResource("1_v3044")]
+transform = Transform3D(1.93765, 0, 0, 0, 1.06429, 0, 0, 0, 1, 322.281, 1.04038, 127.805)
+
+[node name="mountain4" parent="Background" instance=ExtResource("1_v3044")]
+transform = Transform3D(1.15015, 0, 0, 0, 1.64037, 0, 0, 0, 0.831766, -217.492, -2.1951, -102.9)
+
+[node name="land" type="MeshInstance3D" parent="Background"]
+transform = Transform3D(1066.79, 0, 0, 0, 2.08824, 0, 0, 0, 1813.59, 0, -120.944, 0)
+mesh = SubResource("PlaneMesh_txljc")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4c0gx")
+
+[node name="other" type="Node3D" parent="."]
+
+[node name="Barriers" type="Node3D" parent="other"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.79048, 0, 0)
+
+[node name="Barrier" parent="other/Barriers" instance=ExtResource("8_i8l62")]
+transform = Transform3D(1.60568, 0, 0, 0, 1, 0, 0, 0, 4.72957, -39.6179, 4.75482, 177.13)
+
+[node name="Barrier2" parent="other/Barriers" instance=ExtResource("8_i8l62")]
+transform = Transform3D(1.60568, 0, 0, 0, 1, 0, 0, 0, 3.32699, 47.8689, 4.75482, 180.477)
+
+[node name="cameraAnimations" type="AnimationPlayer" parent="other"]
+root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_wu8a3")
 }
 autoplay = "camera_start_pan"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="gate" type="StaticBody3D" parent="other"]
+transform = Transform3D(-1.1059, 0, -9.66808e-08, 0, 1.1059, 0, 9.66808e-08, 0, -1.1059, 0, 0, 389.954)
+visible = false
+collision_layer = 129
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="other/gate"]
+transform = Transform3D(367.866, 0, -7.10543e-15, 0, 192.779, 0, 0, 0, 1, -2.63657e-06, 0, 156.464)
+mesh = SubResource("BoxMesh_q7ukp")
+surface_material_override/0 = SubResource("StandardMaterial3D_ibv2n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="other/gate"]
+transform = Transform3D(217.141, 0, 0, 0, 217.141, 0, 0, 0, 217.141, -0.309177, 0, 19.1452)
+shape = SubResource("BoxShape3D_cwv5k")
+
+[node name="BgMusic" type="AudioStreamPlayer" parent="other"]
 stream = ExtResource("17_6oxv7")
 autoplay = true
 bus = &"music"
 
-[connection signal="pressed" from="player/Camera3D/pause/pauseBtn" to="." method="_on_pause_btn_pressed"]
+[node name="Land" type="MeshInstance3D" parent="other"]
+transform = Transform3D(163.13, 0, 0, 0, 3.65426, 0, 0, 0, 241.454, 11.8374, 6.09815, 100.524)
+mesh = SubResource("PlaneMesh_gwuds")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="other/Land"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="other/Land/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_jva8u")
+
+[node name="slingshotMarker" type="Marker3D" parent="other"]
+transform = Transform3D(0.972533, 0, -0.232766, 0, 1, 0, 0.232766, 0, 0.972533, 5.10717, 62.0475, 30.5927)
+
+[node name="spawnMarker" type="Marker3D" parent="other"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.573654, 4.61458, 6.37764, 174.025)
+
+[connection signal="pressed" from="player/Camera3D/pause/continueBtn" to="." method="_on_continue_btn_pressed"]
+[connection signal="pressed" from="player/Camera3D/pause/restartBtn" to="." method="_on_restart_btn_pressed"]
+[connection signal="pressed" from="player/Camera3D/pause/backToMenuBtn" to="." method="_on_back_to_menu_btn_pressed"]
+[connection signal="body_entered" from="spawners/level1" to="spawners/level1" method="_on_body_entered"]
+[connection signal="body_exited" from="spawners/level1" to="spawners/level1" method="_on_body_exited"]
+[connection signal="body_entered" from="spawners/level2" to="spawners/level2" method="_on_body_entered"]
+[connection signal="body_exited" from="spawners/level2" to="spawners/level2" method="_on_body_exited"]
+[connection signal="body_entered" from="spawners/level3" to="spawners/level3" method="_on_body_entered"]
+[connection signal="body_exited" from="spawners/level3" to="spawners/level3" method="_on_body_exited"]
+[connection signal="body_entered" from="spawners/level4" to="spawners/level4" method="_on_body_entered"]
+[connection signal="body_exited" from="spawners/level4" to="spawners/level4" method="_on_body_exited"]
+[connection signal="body_entered" from="spawners/level5" to="spawners/level5" method="_on_body_entered"]
+[connection signal="body_exited" from="spawners/level5" to="spawners/level5" method="_on_body_exited"]
+[connection signal="body_entered" from="spawners/level6" to="spawners/level6" method="_on_body_entered"]
+[connection signal="body_exited" from="spawners/level6" to="spawners/level6" method="_on_body_exited"]
+[connection signal="body_entered" from="spawners/level7" to="spawners/level7" method="_on_body_entered"]
+[connection signal="body_exited" from="spawners/level7" to="spawners/level7" method="_on_body_exited"]
+[connection signal="body_entered" from="spawners/level8" to="spawners/level8" method="_on_body_entered"]
+[connection signal="body_exited" from="spawners/level8" to="spawners/level8" method="_on_body_exited"]
+[connection signal="body_entered" from="spawners/level9" to="spawners/level9" method="_on_body_entered"]
+[connection signal="body_exited" from="spawners/level9" to="spawners/level9" method="_on_body_exited"]
+[connection signal="body_entered" from="spawners/level10" to="spawners/level10" method="_on_body_entered"]
+[connection signal="body_exited" from="spawners/level10" to="spawners/level10" method="_on_body_exited"]
+[connection signal="body_entered" from="spawners/level11" to="spawners/level11" method="_on_body_entered"]
+[connection signal="body_exited" from="spawners/level11" to="spawners/level11" method="_on_body_exited"]
 [connection signal="body_entered" from="RockFreeArea" to="." method="_on_rock_free_area_body_entered"]

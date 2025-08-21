@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bc83fh3owwcfm"]
+
+[node name="objSpawner" type="Marker3D"]
+transform = Transform3D(28.1074, 0, 0, 0, 1.84872, 0, 0, 0, 1, 2.48859, 27.6848, 118.908)
+gizmo_extents = 0.0

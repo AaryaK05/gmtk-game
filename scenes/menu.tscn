@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dxais32qo4h3x"]
+[gd_scene load_steps=15 format=3 uid="uid://dxais32qo4h3x"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_g528g"]
 [ext_resource type="Texture2D" uid="uid://kn0k1swmtfj6" path="res://assets/art/background/background.png" id="2_650pf"]
@@ -7,6 +7,16 @@
 [ext_resource type="Theme" uid="uid://cxt16q4pote33" path="res://assets/resource/labels.tres" id="4_2487d"]
 [ext_resource type="Script" path="res://scripts/sfx_slider.gd" id="6_7er12"]
 [ext_resource type="AudioStream" uid="uid://gqdqteutgmb0" path="res://assets/music/Eternity.ogg" id="6_yui02"]
+[ext_resource type="Texture2D" uid="uid://cso43s1sol0gl" path="res://assets/art/ui/tut1.PNG" id="7_36h6h"]
+[ext_resource type="Texture2D" uid="uid://becqyvfxjhwq2" path="res://assets/art/ui/tut2.PNG" id="9_2hmcu"]
+[ext_resource type="Texture2D" uid="uid://b3067dig654cr" path="res://assets/art/ui/tut3.PNG" id="10_47s5e"]
+[ext_resource type="Texture2D" uid="uid://c5xmajrthtesh" path="res://assets/art/ui/tut6.PNG" id="10_d05n1"]
+[ext_resource type="Texture2D" uid="uid://cfrst8bswpofa" path="res://assets/art/ui/tut5 (1).png" id="10_lf73t"]
+[ext_resource type="Texture2D" uid="uid://b87rjxsfguyqt" path="res://assets/art/ui/tut5 (2).png" id="11_0ycfb"]
+
+[sub_resource type="Curve" id="Curve_vw0g6"]
+_data = [Vector2(0.236842, 0.835165), 0.0, 0.0, 0, 0, Vector2(0.821053, 0.835165), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="Menu" type="Node"]
 script = ExtResource("1_g528g")
@@ -18,25 +28,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -978.0
-offset_top = -563.5
-offset_right = 978.0
-offset_bottom = 563.5
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="Background" type="Sprite2D" parent="Control"]
-position = Vector2(978, 620.5)
-scale = Vector2(4.5834, 4.67708)
 texture = ExtResource("2_650pf")
-
-[node name="ColorRect" type="ColorRect" parent="Control"]
-layout_mode = 0
-offset_right = 2002.0
-offset_bottom = 1231.0
-color = Color(0.337255, 0.313726, 0.6, 0.156863)
 
 [node name="Buttons" type="Node" parent="."]
 
@@ -73,7 +69,6 @@ text = "Settings"
 vertical_icon_alignment = 0
 
 [node name="quitBtn" type="Button" parent="Buttons/main"]
-visible = false
 layout_mode = 2
 theme = ExtResource("3_1wb3b")
 text = "Quit"
@@ -158,45 +153,158 @@ text = "Back
 "
 vertical_icon_alignment = 0
 
-[node name="controls" type="BoxContainer" parent="Buttons"]
+[node name="controls" type="ColorRect" parent="Buttons"]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -286.0
-offset_top = -100.0
-offset_right = 286.0
-offset_bottom = 100.0
+offset_left = -574.0
+offset_top = -319.0
+offset_right = 574.0
+offset_bottom = 319.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 100
-vertical = true
+color = Color(0.152048, 0.0420726, 0.0185251, 1)
 
-[node name="settingsLabel" type="Label" parent="Buttons/controls"]
-layout_mode = 2
+[node name="label" type="Label" parent="Buttons/controls"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -98.5
+offset_right = 98.5
+offset_bottom = 48.0
+grow_horizontal = 2
 size_flags_horizontal = 4
 theme = ExtResource("4_2487d")
-text = "Controls
+text = "HOW TO PLAY
 "
 
-[node name="Label" type="Label" parent="Buttons/controls"]
-layout_mode = 2
+[node name="control" type="Label" parent="Buttons/controls"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -534.0
+offset_top = 194.0
+offset_right = -215.0
+offset_bottom = 293.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 theme = ExtResource("4_2487d")
 text = "G : Grab Ball/Release Ball"
+autowrap_mode = 2
 
 [node name="cntrlbackBtn" type="Button" parent="Buttons/controls"]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -112.0
+offset_right = 72.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("3_1wb3b")
 text = "Back
 "
 vertical_icon_alignment = 0
+
+[node name="Tut1" type="Sprite2D" parent="Buttons/controls"]
+position = Vector2(182, 200)
+scale = Vector2(0.257749, 0.314937)
+texture = ExtResource("7_36h6h")
+
+[node name="Line2D" type="Line2D" parent="Buttons/controls"]
+position = Vector2(344.6, 191)
+scale = Vector2(1.2, 1)
+points = PackedVector2Array(-3, 3, 44.5, 3)
+width_curve = SubResource("Curve_vw0g6")
+
+[node name="Line2D2" type="Line2D" parent="Buttons/controls"]
+position = Vector2(750.96, 185)
+scale = Vector2(1.12, 1)
+points = PackedVector2Array(-3, 3, 44.5, 3)
+width_curve = SubResource("Curve_vw0g6")
+
+[node name="Line2D3" type="Line2D" parent="Buttons/controls"]
+position = Vector2(937.037, 333.133)
+rotation = 1.56744
+scale = Vector2(1.74819, 1)
+points = PackedVector2Array(-3, 3, 44.5, 3)
+width_curve = SubResource("Curve_vw0g6")
+
+[node name="Tut2" type="Sprite2D" parent="Buttons/controls"]
+position = Vector2(961, 193)
+scale = Vector2(0.312132, 0.294382)
+texture = ExtResource("9_2hmcu")
+
+[node name="Tut3" type="Sprite2D" parent="Buttons/controls"]
+position = Vector2(933, 507)
+scale = Vector2(0.307834, 0.336177)
+texture = ExtResource("10_47s5e")
+
+[node name="Tut6" type="Sprite2D" parent="Buttons/controls"]
+position = Vector2(572, 198)
+scale = Vector2(0.29344, 0.29344)
+texture = ExtResource("10_d05n1")
+
+[node name="Tut5(2)" type="Sprite2D" parent="Buttons/controls"]
+position = Vector2(253, 439)
+texture = ExtResource("11_0ycfb")
+
+[node name="Label3" type="Label" parent="Buttons/controls/Tut5(2)"]
+offset_left = -5.0
+offset_top = -42.0
+offset_right = 49.0
+offset_bottom = -19.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "+0.5KG"
+
+[node name="Tut5(1)" type="Sprite2D" parent="Buttons/controls"]
+position = Vector2(98, 426)
+texture = ExtResource("10_lf73t")
+
+[node name="Label2" type="Label" parent="Buttons/controls/Tut5(1)"]
+offset_left = 42.0
+offset_top = -53.0
+offset_right = 92.0
+offset_bottom = -30.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "-0.5KG"
+
+[node name="Objective" type="Label" parent="Buttons/controls"]
+layout_mode = 0
+offset_left = 533.0
+offset_top = 374.0
+offset_right = 606.0
+offset_bottom = 397.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "Objective
+"
+
+[node name="text" type="Label" parent="Buttons/controls"]
+layout_mode = 0
+offset_left = 371.0
+offset_top = 410.0
+offset_right = 755.0
+offset_bottom = 511.0
+text = "Your rock loses and gains weight by hitting the falling Objects,Get Enough Weight to break the gate in progressions and break the curse.
+
+"
+autowrap_mode = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_yui02")

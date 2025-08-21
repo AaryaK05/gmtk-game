@@ -1,9 +1,18 @@
 extends Node
 @onready var main: BoxContainer = $Buttons/main
 @onready var settings: BoxContainer = $Buttons/settings
-@onready var controls: BoxContainer = $Buttons/controls
+@onready var background: Sprite2D = $Control/Background
+@onready var controls: ColorRect = $Buttons/controls
 
+	
 
+func _physics_process(delta: float) -> void:
+#	window resizing
+	var width=get_viewport().size.x
+	var height=get_viewport().size.y
+	background.scale.x=width/ background.texture.get_size().x
+	background.scale.y=height/ background.texture.get_size().y
+	#pass
 
 func _ready() -> void:
 	main.visible=true
